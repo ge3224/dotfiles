@@ -1,12 +1,7 @@
-# archconf
+# My [Arch Linux](https://wiki.archlinux.org/) Configuration
 
-My [Arch Linux](https://wiki.archlinux.org/) Configuration
-
-## Overview
-
-Arch Linux is a popular GNU/Linux distro. It is a minimum base system,
-configured by the user to add only was is purposely required. Attractive
-features include:
+Arch Linux is a minimum base system, configured by the user to add only was is purposely
+required. Attractive features include:
 
 - You build your system yourself. You choose what components are installed, no
   bloat. There are no services running in the background that you are not aware
@@ -22,36 +17,50 @@ features include:
   desktop workstation because it provides access to to the latest software
   releases.
 
-## Docs
+## Pacman Cheat Sheet
 
-### Setup
+- `$ sudo pacman -Syu`                  Upgrade system
+- `$ sudo pacman -S [package name]`     install package
+- `$ sudo pacman -Rs [package name]`    remove a package and any unneeded dependencies
+- `$ sudo pacman -Ss [package name]`    Queries a package remote repo
+- `$ sudo pacman -Qs [package name]`    Queries a package installed locally
+- `$ sudo pacman -Qet`                  List all explicitly installed packages
+- `$ sudo pacman -Qdt`                  Lists any "orphaned packages"
+- `$ pacman -Qtdq | sudo pacman -Rns -` Remove orphaned packages
 
-- [Installation](docs/Installation.md)
+### Paru AUR helper
 
-- [Git](docs/Git.md)
-- [Pacman Cheat Sheet](docs/Pacman.md)
-- [Paru AUR Helper](docs/Paru.md)
-- [Terminal Emulator](docs/Kitty.md)
-- [i3](docs/i3.md)
+Paru is an AUR helper that automates tasks, such as searching for AUR packages,
+resolving dependencies, retrieving and building packages, retrieving web
+content and user comments, and submitting personal packages to the AUR.
 
-### Software
+## i3 [Cheat Sheet](https://i3wm.org/docs/refcard.html):
 
-- [Neovim](docs/Neovim.md)
+`$ mod` = windows key
 
-- [Firefox/Librewolf](docs/Firefox.md)
-- [Graphic design](docs/Graphic-design.md)
-- [NodeJS](docs/Nodejs.md)
-- [Postgres](https://www.postgresql.org/)
-- [Rclone](docs/Rclone.md)
-- [Telegram](docs/Telegram.md)
-- [Yarn](docs/Yarn.md)
-- [Zoom](docs/Zoom.md)
+- `$ mod <CR>` open a terminal.
+- `$ mod <number>` go to workspace
+- `$ mod shift <number>` move active window to specified workspace
+- `$ mod shift q` close the active window
+- `$ mod d` open application laucher (dmenu)
 
-### Linux Kernel
+## What is the difference between Linux and BSD?
 
-- [BSD](docs/BSD.md)
-- [Screen Saver](docs/Screen-saver.md)
-- [Symlinksj](docs/Symlinks.md)
-- [USB Mounting](docs/USB.md)
-- [Wayland](docs/Wayland.md)
-- [Shell Scripting](docs/Shell-scripting.md)
+Linux and BSD are both Unix-like operating systems, but they have different lineages.
+
+Unix was created in 1969 at AT&T's Bell Labs. Due to an earlier antitrust case,
+AT&T was forbidden from entering the computer business and was required to
+license the Unix's source code to anyone who asked for it. This led to a
+variety of academic and commercial variants.
+
+Then, in 1984, AT&T divested itself of Bell Labs, and Unix could then be sold
+by Bell Labs as a proprietary product. Users were no longer legally allowed to
+modify Unix.
+
+During the next few years, efforts were made by various developers to create a
+free Unix-like software system. Two of these initiatives were 386BSD, a
+descendant of the Berkley Software Distribution, and Linus Torvalds' Linux.
+Linux was released on Sept. 17, 1991. 386BSD predated Linux but was not
+released until 1992, due to legal complications. Torvalds has reportedly stated
+that if 386BSD had been available at the time, he probably would not have
+created Linux.
