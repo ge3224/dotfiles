@@ -1,4 +1,4 @@
-# My [Arch Linux](https://wiki.archlinux.org/) Configuration
+# [Arch Linux](https://wiki.archlinux.org/) Configuration
 
 Arch Linux is a minimum base system, configured by the user to add only was is purposely
 required. Attractive features include:
@@ -43,6 +43,7 @@ content and user comments, and submitting personal packages to the AUR.
 - `$ mod shift <number>` move active window to specified workspace
 - `$ mod shift q` close the active window
 - `$ mod d` open application laucher (dmenu)
+- `$ mod shift space` toggle floating
 
 ## What is the difference between Linux and BSD?
 

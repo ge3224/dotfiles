@@ -7,19 +7,15 @@ eval "$(ssh-agent -s)"
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls -lah --color=auto'
 PS1='[\u@\h \W]\$ '
 
 [[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx -- vt1
 
-# Launch Telegram from the shell
-export PATH="$PATH:$HOME/Tools/Telegram"
-
 # Android Emulator
 export PATH="$PATH:`yarn global bin`"
 export PATH="$PATH:$HOME/go/bin"
-# export PATH="$PATH:$HOME/Tools/flutter/bin"
-# export PATH="$PATH:$HOME/Tools/android-studio/bin"
+# export PATH="$PATH:$HOME/tools/flutter/bin"
+# export PATH="$PATH:$HOME/tools/android-studio/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.pub-cache/bin"
 
@@ -32,14 +28,7 @@ export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 #export SDL_IM_MODULE='fcitx'
 #export XMODIFIERS='@im=fcitx'
 
-export PATH="$PATH:$HOME/Tools/FreeCAD_0.19.3-Linux-Conda_glibc2.12-x86_64.AppImage"
-
-# Python pip
-alias pip='pip3.9'
-
 # Lua language server
-# alias luamake=/home/ge/Tools/lua-language-server/3rd/luamake/luamake
-
 # If there are multiple matches for completion, Tab should cycle through them
 
 bind 'TAB':menu-complete
@@ -55,12 +44,16 @@ bind "set menu-complete-display-prefix on"
 
 bind '"\e[Z":menu-complete-backward'
 
+# Alias
+alias ls='ls -l --color=auto'
+alias pip='pip3.9'
 alias nc='neocities'
-
-alias pr='cd $HOME/Projects/'
-alias pf='cd $HOME/Projects/pf-engineering/'
-alias jg='cd $HOME/Projects/jgraphic/'
+alias pr='cd $HOME/projects/'
+alias pf='cd $HOME/projects/pf-engineering/'
+alias jg='cd $HOME/projects/jgraphic/'
+alias df='cd $HOME/.dotfiles/'
 alias usb='cd $HOME/USB/portable'
+alias nc='cd $HOME/projects/nvim_cfg/'
 . "$HOME/.cargo/env"
 
 

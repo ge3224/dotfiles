@@ -39,12 +39,9 @@ exec --no-startup-id megasync
 
 exec --no-startup-id dropbox
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym $mod+F10 exec --no-startup-id amixer set Master 5%+
+bindsym $mod+F9 exec --no-startup-id amixer set Master 5%-
+bindsym $mod+F8 exec --no-startup-id amixer set Master toggle
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -63,7 +60,7 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 bindsym $mod+b exec --no-startup-id brave
 
 # Start telegram
-bindsym $mod+t exec --no-startup-id telegram
+bindsym $mod+t exec --no-startup-id telegram-desktop
 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -206,6 +203,7 @@ bar {
 # (effectively toggles when you only have two outputs)
 bindsym $mod+x move workspace to output right
 bindsym $mod+Shift+x move workspace to output left
+# bindsym $mod+
 
 # The same as default_border none
 default_border pixel 0
