@@ -54,6 +54,12 @@ alias jg='cd $HOME/projects/jgraphic/'
 alias df='cd $HOME/.dotfiles/'
 alias usb='cd $HOME/USB/portable'
 alias nc='cd $HOME/projects/nvim_cfg/'
+alias td='cd $HOME/Dropbox/todo/'
+alias sandbox='cd $HOME/projects/sandbox/'
+alias swci='$HOME/projects/sandbox/shell/swci.sh'
+alias t20='$HOME/projects/sandbox/shell/timer_20.sh'
+alias t2='$HOME/projects/sandbox/shell/timer_2.sh'
+alias t8='$HOME/projects/sandbox/shell/timer_8.sh'
 . "$HOME/.cargo/env"
 
 
