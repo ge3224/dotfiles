@@ -1,10 +1,19 @@
 ### git
 
-Use symlinks to keep personal config files contained in my private github container "archconf".
+# Git Work Trees
+
+## Git Work Trees Cheat Sheet
+
+```
+git clone --bare <repo> <local name>
+git worktree add <branch>
+git worktree remove <branch>
+```
+REF: ~/scratch/prime_git_worktrees.mp4
 
 #### [Configure git](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 
-Configuration Cliff Notes:
+Cheat Sheet Configuration:
 
 - `$ git config --list --show-origin` -- view all your settings
 - `$ git config --global user.name "John Doe"` 

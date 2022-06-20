@@ -28,6 +28,18 @@ required. Attractive features include:
 - `$ sudo pacman -Qdt`                  Lists any "orphaned packages"
 - `$ pacman -Qtdq | sudo pacman -Rns -` Remove orphaned packages
 
+## Stow Cheat Sheet
+
+- `$ stow .`
+
+## Git Work Trees Cheat Sheet
+
+```
+git clone --bare <repo> <local name>
+git worktree add <branch>
+git worktree remove <branch>
+```
+
 ### Paru AUR helper
 
 Paru is an AUR helper that automates tasks, such as searching for AUR packages,
@@ -65,3 +77,5 @@ Linux was released on Sept. 17, 1991. 386BSD predated Linux but was not
 released until 1992, due to legal complications. Torvalds has reportedly stated
 that if 386BSD had been available at the time, he probably would not have
 created Linux.
+
+# Git work trees
