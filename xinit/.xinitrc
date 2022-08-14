@@ -5,12 +5,13 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
+sleep 2
+xrandr --output DP-0 --rotate right
+
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
-
     xrdb -merge $sysresources
-
 fi
 
 eval $(gnome-keyring-daemon --start)
@@ -49,5 +50,4 @@ export XMODIFIERS=@im=fcitx
 nitrogen --restore &
 picom &
 udiskie --no-notify &
-#fcitx -d &   # see i3/config
 exec i3
