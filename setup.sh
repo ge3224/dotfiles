@@ -19,14 +19,13 @@ mkdir $HOME/Desktop
 
 # ----------------Move Dotfiles to Projects---------------------
 mv ../../dotfiles/ $HOME/Projects/
-cd $HOME/Projects/dotfiles/bijiben/
 cd $HOME
 
 # ---------------------Make CapsLock Esc------------------------
 sudo sed -i 's/terminate:ctrl_alt_bksp/terminate:ctrl_alt_bksp,caps:escape_shifted_capslock/g' > sudo /etc/X11/xorg.conf.d/00-keyboard.conf
 
 # -------------------More Utility Packages----------------------
-sudo pacman -S htop keepass unzip zip nitrogen  picom
+sudo pacman -S htop keepass unzip zip nitrogen picom
 
 # -----------------------USB mounting---------------------------
 # Usage: 
@@ -65,13 +64,13 @@ sudo pacman -U zoom*.tar.zst
 cd $HOME
 
 # ------------------------Neovim Config------------------------
-cd $HOME/projects/
+cd $HOME/Projects/
 mkdir kickstart.nvim
 cd kickstart.nvim
 git clone --bare https://github.com/ge3224/kickstart.nvim.git bare.git
 cd bare.git
 git worktree add ../main
-cd ..
+cd ../
 ln -s ./main $HOME/.config/nvim
 cd $HOME
 
