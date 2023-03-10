@@ -25,7 +25,13 @@ cd $HOME
 sudo sed -i 's/terminate:ctrl_alt_bksp/terminate:ctrl_alt_bksp,caps:escape_shifted_capslock/g' > sudo /etc/X11/xorg.conf.d/00-keyboard.conf
 
 # -------------------More Utility Packages----------------------
-sudo pacman -S xorg-xrandr htop keepass unzip zip nitrogen picom
+sudo pacman -S xorg-xrdb htop keepass unzip zip nitrogen picom
+
+# -----------------Adjust Display Resolution--------------------
+
+awk 'BEGIN{ printf "Xft.dpi: 168" > ".Xresources" }'
+xrdb .Xresources
+awk 'BEGIN{ printf "export GDK_DPI_SCALE=0.84", ".profile"}'
 
 # -----------------------USB mounting---------------------------
 # Usage: 
@@ -83,3 +89,5 @@ sudo cp -r ./backgrounds/* /usr/share/backgrounds/
 sudo cp -r ./pixmaps/* /usr/share/pixmaps/
 sudo cp -r ./lightdm/* /etc/lightdm/
 cd $HOME
+
+echo "...Setup complete"
