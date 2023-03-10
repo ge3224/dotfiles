@@ -2,6 +2,12 @@
 
 1. archinstall (Extra packages: git neovim kitty firefox base-devel)
 
+Reconnecting to wifi
+```
+nmcli device wifi list
+nmcli device wifi connect <SSID> password <password>
+```
+
 ## Adjust for [HiDPI](https://wiki.archlinux.org/title/HiDPI)
 
 Ref: https://youtu.be/lhiLWxJgiAo

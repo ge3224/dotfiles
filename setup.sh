@@ -62,16 +62,6 @@ echo "Starting setup..."
 # sudo pacman -U nerd-fonts-jetbrains-mono*.tar.zst
 # cd $HOME
 
-# ------------------------AUR:Online----------------------------
-# cd $HOME/Downloads/
-# git clone https://aur.archlinux.org/brave-bin.git
-# cd ./brave-bin/
-# makepkg
-# sudo pacman -U brave-bin*.tar.zst
-# cd ../zoom/
-# makepkg
-# sudo pacman -U zoom*.tar.zst
-# cd $HOME
 
 # ------------------------Neovim Config------------------------
 # cd $HOME/Projects/
@@ -93,5 +83,27 @@ echo "Starting setup..."
 # sudo cp -r ./pixmaps/* /usr/share/pixmaps/
 # sudo cp -r ./lightdm/* /etc/lightdm/
 # cd $HOME
+
+# ------------------------AUR:Online----------------------------
+# cd $HOME/Downloads/
+# git clone https://aur.archlinux.org/brave-bin.git
+# cd ./brave-bin/
+# makepkg
+# sudo pacman -U brave-bin*.tar.zst
+# cd ../zoom/
+# makepkg
+# sudo pacman -U zoom*.tar.zst
+# cd $HOME
+
+# ----------------------AUR:Figma-------------------------------
+# cd $HOME/Downloads
+# git clone https://aur.archlinux.org/figma-linux-bin.git
+# cd ./figma-linux-bin
+# sudo pacman -S fuse2
+# makepkg
+# sudo pacman -U figma-linux-bin*.tar.zst
+# cd $HOME
+
+# -------------Convenient Network Management--------------------
 
 echo "...Setup complete"
