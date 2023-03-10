@@ -25,7 +25,7 @@ cd $HOME
 sudo sed -i 's/terminate:ctrl_alt_bksp/terminate:ctrl_alt_bksp,caps:escape_shifted_capslock/g' > sudo /etc/X11/xorg.conf.d/00-keyboard.conf
 
 # -------------------More Utility Packages----------------------
-sudo pacman -S htop keepass unzip zip nitrogen picom
+sudo pacman -S xorg-xrandr htop keepass unzip zip nitrogen picom
 
 # -----------------------USB mounting---------------------------
 # Usage: 
