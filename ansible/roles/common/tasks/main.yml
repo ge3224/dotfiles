@@ -21,6 +21,9 @@
 # Copy i3 config
 - include_tasks: i3.yml
 
+# Copy kitty config
+- include_tasks: kitty.yml
+
 # Setup Neovim config
 - include_tasks: nvim.yml
 

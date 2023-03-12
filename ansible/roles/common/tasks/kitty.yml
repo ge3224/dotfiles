@@ -1,0 +1,10 @@
+# - name: Remove any kitty config in `~/.config/`
+#   ansible.builtin.file:
+#     path: /home/{{ username }}/.config/kitty
+#     state: absent
+
+- name: Creating a symlink from repo `kitty` to `~/.config`
+  ansible.builtin.file:
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/kitty
+    dest: /home/{{ username }}/.config/kitty
+    state: link
