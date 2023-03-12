@@ -1,7 +1,13 @@
-# - name: Remove any i3 config in ~/.config
-#   ansible.builtin.file:
-#     path: /home/{{ username }}/.config/i3
-#     state: absent
+# Determine if a path exists and is a directory.
+- name: Get stats of ~/.config/i3
+  ansible.builtin.stat:
+    path: /home/{{ username }}/.config/i3
+  register: p
+
+- name: Remove any kitty config that is not a symlink
+  ansible.builtin.file:
+    path: /home/{{ username }}/.config/i3
+  when: p.stat.isdir is defined and p.stat.isdir
 
 - name: Creating a symlink from repo `i3` to `~/.config`
   ansible.builtin.file:
@@ -9,10 +15,16 @@
     dest: /home/{{ username }}/.config/i3
     state: link
 
-# - name: Remove any i3status config
-#   ansible.builtin.file:
-#    path: /home/{{ username }}/.config/i3status
-#    state: absent
+# Determine if a path exists and is a directory.
+- name: Get stats of ~/.config/i3status
+  ansible.builtin.stat:
+    path: /home/{{ username }}/.config/i3status
+  register: p
+
+- name: Remove any kitty config that is not a symlink
+  ansible.builtin.file:
+    path: /home/{{ username }}/.config/i3status
+  when: p.stat.isdir is defined and p.stat.isdir
 
 - name: Creating a symlink from repo `i3status` to `~/.config`
   ansible.builtin.file:

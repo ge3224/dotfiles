@@ -7,12 +7,19 @@
       - pcmanfm
       - qt5ct
     state: present
+      
+# Determine if a path exists and is a directory.
+- name: Get stats of ~/.profile
+  ansible.builtin.stat:
+    path: /home/{{ username }}/.profile
+  register: p
 
-# - name: Remove any .profile in ~/.profile
-#   ansible.builtin.file:
-#     path: /home/{{ username }}/.profile
-#     state: absent
+- name: Remove any kitty config that is not a symlink
+  ansible.builtin.file:
+    path: /home/{{ username }}/.profile
+  when: p.stat.isdir is defined and p.stat.isdir
 
+# Create a symlink
 - name: Creating a symlink from repo `.profile` to `~/`
   ansible.builtin.file:
     src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/.profile
