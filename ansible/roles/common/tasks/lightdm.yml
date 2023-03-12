@@ -24,60 +24,40 @@
     group: "{{ username }}"
     mode: u+rw,g+r,o--
 
-- name: Get sha1sum of lightdm config in etc
-  stat:
-    path: /etc/lightdm/lightdm.conf
-    checksum_algorithm: sha256
-    get_checksum: yes
-  register: sha_etc
+# Determine if a path exists and is a directory.
+- name: Get stats of /etc/lightdm/
+  ansible.builtin.stat:
+    path: /etc/lightdm
+  register: p
 
-- name: Get sha1sum of lightdm config in user_module
-  stat:
-    path: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/lightdm.conf
-    checksum_algorithm: sha256
-    get_checksum: yes
-  register: sha_new
-
-- name: Remove file (delete file)
+- name: Remove any kitty config that is not a symlink
   ansible.builtin.file:
-    path: /etc/lightdm/lightdm.conf
+    path: /etc/lightdm
     state: absent
-  when: sha_etc != sha_new
+  when: p.stat.isdir is defined and p.stat.isdir
 
-- name: Replace lightdm config
-  copy:
-    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/lightdm.conf
-    dest: /etc/lightdm/lightdm.conf
-    force: False
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: u+rw,g+r,o--
-
-- name: Get sha1sum of lightdm config in etc
-  stat:
-    path: /etc/lightdm/lightdm-webkit2-greeter.conf
-    checksum_algorithm: sha256
-    get_checksum: yes
-  register: sha_default
-
-- name: Get sha1sum of lightdm config in user_module
-  stat:
-    path: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/lightdm-webkit2-greeter.conf
-    checksum_algorithm: sha256
-    get_checksum: yes
-  register: sha_custom
-
-- name: Remove file (delete file)
+# Create a symlink
+- name: Creating a symlink from repo lightdm to /etc/
   ansible.builtin.file:
-    path: /etc/lightdm/lightdm-webkit2-greeter.conf
-    state: absent
-  when: sha_default != sha_custom
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm
+    dest: /etc/lightdm
+    state: link
 
-- name: Replace lightdm-webkit2-greeter config
-  copy:
-    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/lightdm-webkit2-greeter.conf
-    dest: /etc/lightdm/lightdm-webkit2-greeter.conf
-    force: False
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: u+rw,g+r,o--
+# Determine if a path exists and is a directory.
+- name: Get stats on `/etc/lightdm/`
+  ansible.builtin.stat:
+    path: /etc/lightdm
+  register: p
+
+- name: Remove any `lightdm` directory that is not a symlink
+  ansible.builtin.file:
+    path: /etc/lightdm
+    state: absent
+  when: p.stat.isdir is defined and p.stat.isdir
+
+# Create a symlink
+- name: Creating a symlink from repo `lightdm` to `/etc/`
+  ansible.builtin.file:
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm
+    dest: /etc/lightdm
+    state: link

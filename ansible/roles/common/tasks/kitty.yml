@@ -7,6 +7,7 @@
 - name: Remove any kitty config that is not a symlink
   ansible.builtin.file:
     path: /home/{{ username }}/.config/kitty
+    state: absent
   when: p.stat.isdir is defined and p.stat.isdir
 
 # Create a symlink
