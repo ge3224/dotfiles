@@ -53,6 +53,26 @@
     group: "{{ username }}"
     mode: u+rw,g+r,o--
 
+- name: Get sha1sum of lightdm config in etc
+  stat:
+    path: /etc/lightdm/lightdm-webkit2-greeter.conf
+    checksum_algorithm: sha256
+    get_checksum: yes
+  register: sha_default
+
+- name: Get sha1sum of lightdm config in user_module
+  stat:
+    path: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/lightdm-webkit2-greeter.conf
+    checksum_algorithm: sha256
+    get_checksum: yes
+  register: sha_custom
+
+- name: Remove file (delete file)
+  ansible.builtin.file:
+    path: /etc/lightdm/lightdm-webkit2-greeter.conf
+    state: absent
+  when: sha_default != sha_custom
+
 - name: Replace lightdm-webkit2-greeter config
   copy:
     src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/lightdm-webkit2-greeter.conf
