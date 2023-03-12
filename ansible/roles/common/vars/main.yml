@@ -11,4 +11,6 @@ aur:
     packages:
         - nerd-fonts-jetbrains-mono-160
         - brave-bin
+        - figma-linux-bin
+        # - zoom
 ## ===========================

@@ -24,12 +24,39 @@
     group: "{{ username }}"
     mode: u+rw,g+r,o--
 
+- name: Get sha1sum of lightdm config in etc
+  stat:
+    path: /etc/lightdm/lightdm.conf
+    checksum_algorithm: sha256
+    get_checksum: yes
+  register: sha_etc
 
-# sudo cp -r ./lightdm/* /etc/lightdm/
-- name: Copy pixmaps
+- name: Get sha1sum of lightdm config in user_module
+  stat:
+    path: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/lightdm.conf
+    checksum_algorithm: sha256
+    get_checksum: yes
+  register: sha_new
+
+- name: Remove file (delete file)
+  ansible.builtin.file:
+    path: /etc/lightdm/lightdm.conf
+    state: absent
+  when: sha_etc != sha_new
+
+- name: Replace lightdm config
   copy:
-    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/
-    dest: /etc/lightdm/
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/lightdm.conf
+    dest: /etc/lightdm/lightdm.conf
+    force: False
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: u+rw,g+r,o--
+
+- name: Replace lightdm-webkit2-greeter config
+  copy:
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/lightdm-webkit2-greeter.conf
+    dest: /etc/lightdm/lightdm-webkit2-greeter.conf
     force: False
     owner: "{{ username }}"
     group: "{{ username }}"
