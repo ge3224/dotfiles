@@ -1,3 +1,16 @@
+- name: Clone the ansible-aur github repository
+  git:
+    repo: https://github.com/pigmonkey/ansible-aur.git
+    dest: /home/{{ username }}/Projects/ansible-aur
+    clone: yes
+    update: yes
+
+- name: Creating a symlink
+  ansible.builtin.file:
+    src: /home/{{ username }}/Projects/ansible-aur/aur
+    dest: library/aur
+    state: link
+
 - name: Create AUR directory
   file: path=/home/{{ username }}/Downloads/{{ aur.dir }}
         state=directory

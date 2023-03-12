@@ -9,5 +9,5 @@ use_aur: True
 aur:
     dir: aur
     packages:
-        - paru
+        - nerd-fonts-jetbrains-mono-160
 ## ===========================
