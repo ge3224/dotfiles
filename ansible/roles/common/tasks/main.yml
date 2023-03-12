@@ -27,6 +27,9 @@
 # Setup Neovim config
 - include_tasks: nvim.yml
 
+# Configure lightdm
+- include_tasks: lightdm.yml
+
 # Setup GTK apps
 - include_tasks: gtk.yml
 

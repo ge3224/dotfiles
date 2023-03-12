@@ -1,0 +1,36 @@
+- name: Install lightdm greeter
+  community.general.pacman:
+    name:
+      - lightdm-webkit2-greeter
+    state: present
+
+# sudo cp -r ./backgrounds/* /usr/share/backgrounds/
+- name: Copy background images
+  copy:
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/images/backgrounds/
+    dest: /usr/share/backgrounds/
+    force: False
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: u+rw,g+r,o--
+
+# sudo cp -r ./pixmaps/* /usr/share/pixmaps/
+- name: Copy pixmaps
+  copy:
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/images/pixmaps/
+    dest: /usr/share/pixmaps/
+    force: False
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: u+rw,g+r,o--
+
+
+# sudo cp -r ./lightdm/* /etc/lightdm/
+- name: Copy pixmaps
+  copy:
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm/
+    dest: /etc/lightdm/
+    force: False
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: u+rw,g+r,o--
