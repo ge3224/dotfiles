@@ -1,0 +1,31 @@
+# Create home/usr directories 
+- name: Create 'Projects' directory
+  ansible.builtin.file:
+    path: /home/ge/Projects
+    state: directory
+    mode: '0755'
+
+- name: Create 'Documents' directory
+  ansible.builtin.file:
+    path: /home/ge/Documents
+    state: directory
+    mode: '0775'
+
+- name: Create 'Downloads' directory
+  ansible.builtin.file:
+    path: /home/ge/Downloads
+    state: directory
+    mode: '0775'
+
+- name: Create 'Design' directory
+  ansible.builtin.file:
+    path: /home/ge/Design
+    state: directory
+    mode: '0775'
+
+- name: Create 'Desktop' directory
+  ansible.builtin.file:
+    path: /home/ge/Desktop
+    state: directory
+    mode: '0775'
+

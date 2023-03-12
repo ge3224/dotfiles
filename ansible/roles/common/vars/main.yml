@@ -1,0 +1,13 @@
+### Playbook Configuration Variables
+## User info
+username: ge
+
+## AUR vars
+## ===========================
+use_aur: True
+
+aur:
+    dir: aur
+    packages:
+        - paru
+## ===========================

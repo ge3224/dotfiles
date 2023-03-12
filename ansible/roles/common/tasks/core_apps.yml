@@ -1,0 +1,45 @@
+- name: Install basic utils, shells, apps
+  community.general.pacman:
+    name:
+      - xorg
+      - kitty
+      - vlc
+      - tree
+    state: present
+
+- name: Install archival utils
+  community.general.pacman:
+    name: 
+      - atool
+      - p7zip
+      - unrar
+      - unzip
+      - xz
+      - zip
+      - bzip2
+      - gzip
+      - tar
+    state: present
+
+- name: Install download utils
+  community.general.pacman:
+    name:
+      - curl
+      - wget
+      - aria2
+    state: present
+
+- name: Install xclip for Neovim to access clipboard
+  community.general.pacman:
+    name:
+      - xclip
+    state: present
+
+- name: Install core imaging apps
+  community.general.pacman:
+    name:
+      - gimp
+      - imagemagick
+      - nitrogen
+      - picom
+    state: present

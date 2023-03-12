@@ -1,0 +1,25 @@
+- name: check updates
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+# Configure pacman (colorize and repos)
+- include_tasks: pacman.yml
+
+# Switch CapsLock to Esc
+- include_tasks: keymap.yml
+
+# Create directories in /home/usr
+- include_tasks: home_directories.yml
+
+# Install core apps
+- include_tasks: core_apps.yml
+
+# Configure convenient USB mounting
+- include_tasks: usb.yml
+
+# Copy i3 config
+- include_tasks: i3.yml
+
+# Setup GTK apps
+- include_tasks: gtk.yml

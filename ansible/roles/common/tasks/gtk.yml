@@ -1,0 +1,9 @@
+- name: Install gtk apps
+  community.general.pacman:
+    name:
+      - arc-solid-gtk-theme
+      - keepassxc
+      - lxappearance
+      - pcmanfm
+      - qt5ct
+    state: present

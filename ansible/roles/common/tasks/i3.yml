@@ -1,0 +1,39 @@
+- name: Remove any i3 config in ~/.config
+  ansible.builtin.file:
+    path: /home/{{ username }}/.config/i3
+    state: absent
+
+- name: Create a new i3 directory in ~/.config
+  ansible.builtin.file:
+    path: /home/{{ username }}/.config/i3
+    state: directory
+    mode: '0755'
+
+- name: Copy i3 config
+  copy: 
+   src: user_home/i3/config
+   dest: /home/{{ username }}/.config/i3/
+   force: False
+   owner: "{{ username }}"
+   group: "{{ username }}"
+   mode: u+rw,g+r,o--
+
+- name: Remove any i3status config
+  ansible.builtin.file:
+   path: /home/{{ username }}/.config/i3status
+   state: absent
+
+- name: Create a new i3status directory in ~/.config
+  ansible.builtin.file:
+    path: /home/{{ username }}/.config/i3status
+    state: directory
+    mode: '0755'
+
+- name: Copy i3 config
+  copy: 
+   src: user_home/i3status/config
+   dest: /home/{{ username }}/.config/i3status/
+   force: False
+   owner: "{{ username }}"
+   group: "{{ username }}"
+   mode: u+rw,g+r,o--

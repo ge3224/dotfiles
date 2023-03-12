@@ -1,0 +1,8 @@
+# Configure convenient USB mounting
+- name: Install usb utils
+  community.general.pacman:
+    name:
+      - udisks2 
+      - udiskie
+    state: present
+
