@@ -1,39 +1,21 @@
-- name: Remove any i3 config in ~/.config
+# - name: Remove any i3 config in ~/.config
+#   ansible.builtin.file:
+#     path: /home/{{ username }}/.config/i3
+#     state: absent
+
+- name: Creating a symlink from repo `i3` to `~/.config`
   ansible.builtin.file:
-    path: /home/{{ username }}/.config/i3
-    state: absent
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/i3/
+    dest: /home/{{ username }}/.config/i3
+    state: link
 
-- name: Create a new i3 directory in ~/.config
+# - name: Remove any i3status config
+#   ansible.builtin.file:
+#    path: /home/{{ username }}/.config/i3status
+#    state: absent
+
+- name: Creating a symlink from repo `i3status` to `~/.config`
   ansible.builtin.file:
-    path: /home/{{ username }}/.config/i3
-    state: directory
-    mode: '0755'
-
-- name: Copy i3 config
-  copy: 
-   src: user_home/i3/config
-   dest: /home/{{ username }}/.config/i3/
-   force: False
-   owner: "{{ username }}"
-   group: "{{ username }}"
-   mode: u+rw,g+r,o--
-
-- name: Remove any i3status config
-  ansible.builtin.file:
-   path: /home/{{ username }}/.config/i3status
-   state: absent
-
-- name: Create a new i3status directory in ~/.config
-  ansible.builtin.file:
-    path: /home/{{ username }}/.config/i3status
-    state: directory
-    mode: '0755'
-
-- name: Copy i3 config
-  copy: 
-   src: user_home/i3status/config
-   dest: /home/{{ username }}/.config/i3status/
-   force: False
-   owner: "{{ username }}"
-   group: "{{ username }}"
-   mode: u+rw,g+r,o--
+    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/i3status/
+    dest: /home/{{ username }}/.config/i3status
+    state: link

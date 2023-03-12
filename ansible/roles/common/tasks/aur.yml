@@ -5,7 +5,7 @@
     clone: yes
     update: yes
 
-- name: Creating a symlink
+- name: Creating a symlink from repo `aur` to `library`
   ansible.builtin.file:
     src: /home/{{ username }}/Projects/ansible-aur/aur
     dest: library/aur
