@@ -10,4 +10,5 @@ aur:
     dir: aur
     packages:
         - nerd-fonts-jetbrains-mono-160
+        - brave-bin
 ## ===========================
