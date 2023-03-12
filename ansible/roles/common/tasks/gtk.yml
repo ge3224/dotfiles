@@ -7,3 +7,17 @@
       - pcmanfm
       - qt5ct
     state: present
+
+- name: Remove any .profile in ~/.profile
+  ansible.builtin.file:
+    path: /home/{{ username }}/.profile
+    state: absent
+
+- name: Copy latest .profile config to ~/.config
+  copy:
+    src: user_home/.profile
+    dest: /home/{{ username }}/
+    force: False
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: u+rw,g+r,o--

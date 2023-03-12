@@ -21,5 +21,8 @@
 # Copy i3 config
 - include_tasks: i3.yml
 
+# Setup Neovim config
+- include_tasks: nvim.yml
+
 # Setup GTK apps
 - include_tasks: gtk.yml
