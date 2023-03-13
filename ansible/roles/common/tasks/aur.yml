@@ -17,7 +17,7 @@
         owner={{ username }}
         group={{ username }}
 
-- name: Install AUR base packages
+- name: Install aur base packages
   aur:
     name: "{{ aur.packages }}"
     user: "{{ username }}"

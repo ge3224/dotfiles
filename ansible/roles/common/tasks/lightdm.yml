@@ -1,9 +1,3 @@
-- name: Install lightdm greeter
-  community.general.pacman:
-    name:
-      - lightdm-webkit2-greeter
-    state: present
-
 # sudo cp -r ./backgrounds/* /usr/share/backgrounds/
 - name: Copy background images
   copy:
@@ -24,40 +18,22 @@
     group: "{{ username }}"
     mode: u+rw,g+r,o--
 
-# Determine if a path exists and is a directory.
-- name: Get stats of /etc/lightdm/
-  ansible.builtin.stat:
-    path: /etc/lightdm
-  register: p
+- name: Install lightdm greeter
+  community.general.pacman:
+    name:
+      - lightdm-webkit2-greeter
+    state: present
 
-- name: Remove any kitty config that is not a symlink
-  ansible.builtin.file:
-    path: /etc/lightdm
-    state: absent
-  when: p.stat.isdir is defined and p.stat.isdir
+# Update main lightdm conf
+- name: Switch to lightdm-webkit2-greeter
+  replace:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#greeter-session=example-gtk-gnome$'
+    replace: 'greeter-session=lightdm-webkit2-greeter'
 
-# Create a symlink
-- name: Creating a symlink from repo lightdm to /etc/
-  ansible.builtin.file:
-    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm
-    dest: /etc/lightdm
-    state: link
-
-# Determine if a path exists and is a directory.
-- name: Get stats on `/etc/lightdm/`
-  ansible.builtin.stat:
-    path: /etc/lightdm
-  register: p
-
-- name: Remove any `lightdm` directory that is not a symlink
-  ansible.builtin.file:
-    path: /etc/lightdm
-    state: absent
-  when: p.stat.isdir is defined and p.stat.isdir
-
-# Create a symlink
-- name: Creating a symlink from repo `lightdm` to `/etc/`
-  ansible.builtin.file:
-    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/lightdm
-    dest: /etc/lightdm
-    state: link
+# Update main lightdm conf
+- name: Set user-session to i3
+  replace:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#user-session=default$'
+    replace: 'user-session=i3'

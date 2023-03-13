@@ -7,6 +7,7 @@
 - name: Remove any kitty config that is not a symlink
   ansible.builtin.file:
     path: /home/{{ username }}/.config/i3
+    state: absent
   when: p.stat.isdir is defined and p.stat.isdir
 
 - name: Creating a symlink from repo `i3` to `~/.config`
@@ -24,6 +25,7 @@
 - name: Remove any kitty config that is not a symlink
   ansible.builtin.file:
     path: /home/{{ username }}/.config/i3status
+    state: absent
   when: p.stat.isdir is defined and p.stat.isdir
 
 - name: Creating a symlink from repo `i3status` to `~/.config`
