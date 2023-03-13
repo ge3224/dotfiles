@@ -11,6 +11,7 @@ aur:
     packages:
         - nerd-fonts-jetbrains-mono-160
         - brave-bin
+        - xnviewmp
         - figma-linux-bin
         # - zoom # zoom installs manually
 ## ===========================
