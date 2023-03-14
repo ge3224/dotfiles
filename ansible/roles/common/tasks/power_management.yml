@@ -2,6 +2,6 @@
 - name: Install packages for power management
   community.general.pacman:
     name:
-      - mate-power-manager
-      - xautolock
+      # - xfce4-power-manager
+      # - xautolock
       - i3lock

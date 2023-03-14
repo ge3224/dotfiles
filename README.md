@@ -3,13 +3,13 @@
 ## TODOS
 
 - [x] Fix icons in LightDM Greeter
-- [ ] Configure power management
+- [x] Configure power management
+- [ ] Configure display brightness controls (i3)
 - [ ] Setup SSH and Keyring
-- [ ] Virtual Box and Windows 10
 - [ ] Email notifier
-- [ ] Telegram
 - [ ] Install Rust
 - [ ] Install Golang
+- [ ] Virtual Box and Windows 10
 - [ ] Zsh
 
 ## Installing Arch

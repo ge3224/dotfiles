@@ -12,7 +12,7 @@
 
 - name: Creating a symlink from repo `i3` to `~/.config`
   ansible.builtin.file:
-    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/i3/
+    src: /home/{{ username }}/Projects/dotfiles/main/ansible/roles/common/files/user_home/i3/
     dest: /home/{{ username }}/.config/i3
     state: link
 
@@ -30,6 +30,6 @@
 
 - name: Creating a symlink from repo `i3status` to `~/.config`
   ansible.builtin.file:
-    src: /home/{{ username }}/Projects/dotfiles/bijiben/ansible/roles/common/files/user_home/i3status/
+    src: /home/{{ username }}/Projects/dotfiles/main/ansible/roles/common/files/user_home/i3status/
     dest: /home/{{ username }}/.config/i3status
     state: link

@@ -23,8 +23,6 @@ font pango: JetBrainsMono Nerd Font 12
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec_always --no-startup-id mate-power-manager
-exec --no-startup-id xautolock -time 10 -locker 'i3lock -d -i /usr/share/backgrounds/alena-aenami-7p-m-1k.jpg'
 exec --no-startup-id nitrogen --restore &
 exec --no-startup-id picom &
 exec --no-startup-id udiskie &
@@ -34,7 +32,7 @@ exec --no-startup-id udiskie &
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -i /usr/share/backgrounds/qianfanggaoneng.jpg --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -198,3 +196,5 @@ bar {
 
 default_border pixel 0
 # default_border pixel 3
+
+bindsym $mod+Shift+x exec convert /usr/share/backgrounds/qianfanggaoneng.jpg RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin
