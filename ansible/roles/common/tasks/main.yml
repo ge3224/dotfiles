@@ -12,6 +12,9 @@
 # Create directories in /home/usr
 - include_tasks: home_directories.yml
 
+# Setup powermanagement
+- include_tasks: power_management.yml
+
 # Install core apps
 - include_tasks: core_apps.yml
 

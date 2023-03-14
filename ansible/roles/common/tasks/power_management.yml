@@ -1,0 +1,7 @@
+# Install packages
+- name: Install packages for power management
+  community.general.pacman:
+    name:
+      - mate-power-manager
+      - xautolock
+      - i3lock
