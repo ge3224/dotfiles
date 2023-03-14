@@ -37,3 +37,17 @@
     path: /etc/lightdm/lightdm.conf
     regexp: '^#user-session=default$'
     replace: 'user-session=i3'
+
+# Update greeter logo
+- name: Set greeter logo
+  replace:
+    path: /etc/lightdm/lightdm-webkit2-greeter.conf
+    regexp: '^logo\s{1,}= /usr/share/pixmaps/archlinux-logo.svg$'
+    replace: '^logo = /usr/share/pixmaps/archlinux-logo.png$'
+
+# Update settings in greeter
+- name: Set greeter user_image
+  replace:
+    path: /etc/lightdm/lightdm-webkit2-greeter.conf
+    regexp: '^user_image\s{1,}= /usr/share/pixmaps/archlinux-user.svg$'
+    replace: 'user_image = /usr/share/pixmaps/ge.png'

@@ -2,7 +2,7 @@
 
 ## TODOS
 
-- [ ] Fix icons in LightDM Greeter
+- [x] Fix icons in LightDM Greeter
 - [ ] Configure power management
 - [ ] Setup SSH and Keyring
 - [ ] Virtual Box and Windows 10
