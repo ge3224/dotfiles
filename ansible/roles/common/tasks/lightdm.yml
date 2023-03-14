@@ -43,7 +43,7 @@
   replace:
     path: /etc/lightdm/lightdm-webkit2-greeter.conf
     regexp: '^logo\s{1,}= /usr/share/pixmaps/archlinux-logo.svg$'
-    replace: '^logo = /usr/share/pixmaps/archlinux-logo.png$'
+    replace: 'logo = /usr/share/pixmaps/archlinux-logo.png'
 
 # Update settings in greeter
 - name: Set greeter user_image
