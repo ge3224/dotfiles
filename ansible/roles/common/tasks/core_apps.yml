@@ -2,7 +2,6 @@
   community.general.pacman:
     name:
       - xorg
-      - kitty
       - vlc
       - tree
     state: present
@@ -19,6 +18,7 @@
       - bzip2
       - gzip
       - tar
+      - brightnessctl
     state: present
 
 - name: Install download utils
@@ -43,4 +43,5 @@
       - inkscape
       - nitrogen
       - picom
+      - libreoffice-fresh
     state: present
