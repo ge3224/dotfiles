@@ -1,5 +1,8 @@
 # Dotfiles for bijiben -- Arch Installation and Setup with Ansible
 
+- [Laptops](https://wiki.archlinux.org/title/Laptop)
+- [Thinkpads](https://wiki.archlinux.org/title/Laptop/Lenovo)
+
 ## TODOS
 
 - [x] Fix icons in LightDM Greeter
@@ -48,6 +51,7 @@ sudo pacman -S ansible
 ### Running a Playbook
 
 ```
+cd <project_folder>/ansible/roles
 ansible-playbook -K main.yml
 ```
 
@@ -55,3 +59,5 @@ Ref:
 
 * [Example](https://github.com/linuxpiper/ansible-arch-setup)
 * [Video](https://www.youtube.com/watch?v=H0cpE1Q_9N0)
+
+Notes:

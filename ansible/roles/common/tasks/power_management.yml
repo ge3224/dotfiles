@@ -2,6 +2,37 @@
 - name: Install packages for power management
   community.general.pacman:
     name:
-      # - xfce4-power-manager
-      # - xautolock
+      - tpacpi-bat
       - i3lock
+
+# Configure tpacpi-bat
+- name: Copy tpacpi.conf.d
+  copy:
+    src: user_home/tpacpi-bat/tpacpi.conf.d
+    dest: /etc/conf.d/tpacpi
+    force: False
+    owner: root
+    group: root
+    mode: u+rw,g+r,o+r
+
+- name: Copy tpacpi.service
+  copy:
+    src: user_home/tpacpi-bat/tpacpi.service
+    dest: /usr/lib/systemd/system
+    force: False
+    owner: root
+    group: root
+    mode: u+rw,g+r,o+r
+
+# Enable start tpacpi-bat tpacpi
+- name: Enable tpacpi-bat
+  ansible.builtin.systemd:
+    name: tpacpi-bat.service
+    state: started
+    enabled: true
+
+- name: Enable tpacpi
+  ansible.builtin.systemd:
+    name: tpacpi.service
+    state: started
+    enabled: true
