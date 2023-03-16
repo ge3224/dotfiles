@@ -1,0 +1,6 @@
+- name: Install home office apps
+  community.general.pacman:
+    name: 
+      - libreoffice-fresh
+    state: present
+
