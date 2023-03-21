@@ -6,7 +6,7 @@
 ## TODOS
 
 - [x] Fix icons in LightDM Greeter
-- [x] Configure power management
+- [ ] Configure power management
 - [x] Configure display brightness controls (i3)
 - [ ] Setup SSH and Keyring
 - [ ] Email notifier

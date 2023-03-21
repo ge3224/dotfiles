@@ -4,5 +4,6 @@
     name:
       - udisks2 
       - udiskie
+      - usbutils # for detecting a printer
     state: present
 

@@ -1,6 +1,22 @@
 - name: Install home office apps
   community.general.pacman:
     name: 
+      # Word processing
       - libreoffice-fresh
+      # for printers # https://www.youtube.com/watch?v=jnmCbEWNV1w
+      - cups
+      - system-config-printer
+      - gutenprint
     state: present
 
+- name: Enable a timer unit for dnf-automatic
+  ansible.builtin.systemd:
+    name: cups
+    state: started
+    enabled: true
+
+- name: adding existing user "{{ username }}" to group sudo
+  ansible.builtin.user:
+    name: "{{ username }}"
+    groups: wheel,lp
+    append: yes

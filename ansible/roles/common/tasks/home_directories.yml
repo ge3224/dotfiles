@@ -29,3 +29,11 @@
     state: directory
     mode: '0775'
 
+- name: Recursively change ownership of home directory
+  ansible.builtin.file:
+    path: /home/ge
+    state: directory
+    recurse: yes
+    owner: ge
+    group: ge
+
