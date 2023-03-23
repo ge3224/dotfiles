@@ -9,7 +9,7 @@
 - [ ] Configure power management
 - [x] Configure display brightness controls (i3)
 - [ ] Setup SSH and Keyring
-- [ ] Email notifier
+- [x] Email client
 - [ ] Install Rust
 - [ ] Install Golang
 - [ ] Virtual Box and Windows 10

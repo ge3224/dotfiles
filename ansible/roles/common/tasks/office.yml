@@ -3,6 +3,7 @@
     name: 
       # Word processing
       - libreoffice-fresh
+      - evolution # email client
       # for printers # https://www.youtube.com/watch?v=jnmCbEWNV1w
       - cups
       - system-config-printer
