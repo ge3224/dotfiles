@@ -9,7 +9,7 @@
       - gutenprint
     state: present
 
-- name: Enable a timer unit for dnf-automatic
+- name: start/enable cups
   ansible.builtin.systemd:
     name: cups
     state: started

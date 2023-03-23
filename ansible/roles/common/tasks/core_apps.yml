@@ -42,5 +42,6 @@
       - imagemagick
       - inkscape
       - nitrogen
+      - redshift
       - picom
     state: present
