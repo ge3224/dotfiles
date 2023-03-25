@@ -1,39 +1,38 @@
 # Create home/usr directories 
 - name: Create 'Projects' directory
   ansible.builtin.file:
-    path: /home/ge/Projects
+    path: /home/{{ username }}/Projects
     state: directory
-    mode: '0755'
+    mode: '0775'
 
 - name: Create 'Documents' directory
   ansible.builtin.file:
-    path: /home/ge/Documents
+    path: /home/{{ username }}/Documents
     state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0775'
 
 - name: Create 'Downloads' directory
   ansible.builtin.file:
-    path: /home/ge/Downloads
+    path: /home/{{ username }}/Downloads
     state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0775'
 
 - name: Create 'Design' directory
   ansible.builtin.file:
-    path: /home/ge/Design
+    path: /home/{{ username }}/Design
     state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0775'
 
 - name: Create 'Desktop' directory
   ansible.builtin.file:
-    path: /home/ge/Desktop
+    path: /home/{{ username }}/Desktop
     state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
     mode: '0775'
-
-- name: Recursively change ownership of home directory
-  ansible.builtin.file:
-    path: /home/ge
-    state: directory
-    recurse: yes
-    owner: ge
-    group: ge
-
