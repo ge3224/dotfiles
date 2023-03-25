@@ -33,9 +33,6 @@
 # Copy kitty config
 - include_tasks: kitty.yml
 
-# Setup Neovim config
-- include_tasks: nvim.yml
-
 # Configure lightdm
 - include_tasks: lightdm.yml
 

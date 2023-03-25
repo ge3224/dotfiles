@@ -89,6 +89,10 @@ Ref:
 - [Arch Wiki - SSH Keys](https://wiki.archlinux.org/title/SSH_keys)
 - [Github Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
+### Neovim config
+
+Setting up manually, since it's always a work in progress and I will be pushing commits via ssh.
+
 ### Installing nodejs via pacman 
 
 ```
