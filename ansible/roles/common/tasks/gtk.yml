@@ -14,11 +14,11 @@
     path: /home/{{ username }}/.profile
   register: p
 
-- name: Remove any kitty config that is not a symlink
+- name: Remove any .profile config that is not a symlink
   ansible.builtin.file:
     path: /home/{{ username }}/.profile
     state: absent
-  when: p.stat.isdir is defined and p.stat.isdir
+  when: p.stat.isfile is defined and p.stat.isfile
 
 # Create a symlink
 - name: Creating a symlink from repo `.profile` to `~/`
@@ -26,3 +26,4 @@
     src: /home/{{ username }}/Projects/dotfiles/main/ansible/roles/common/files/user_home/.profile
     dest: /home/{{ username }}/.profile
     state: link
+
