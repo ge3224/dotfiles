@@ -2,9 +2,14 @@
 ## User info
 username: ge
 
+## SSH Key
+ssh_key_filename: id_ed25519
+
+
 ## AUR vars
 ## ===========================
 use_aur: True
+
 
 aur:
     dir: aur

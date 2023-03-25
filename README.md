@@ -8,7 +8,7 @@
 - [x] Fix icons in LightDM Greeter
 - [ ] Configure power management
 - [x] Configure display brightness controls (i3)
-- [ ] Setup [SSH Key/Keyring](https://wiki.archlinux.org/title/SSH_keys#SSH_agents) for [Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+- [x] Setup [SSH Key/Keyring](https://wiki.archlinux.org/title/SSH_keys#SSH_agents) for [Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
 - [x] Email client
 - [ ] Install Rust
 - [ ] Install Golang

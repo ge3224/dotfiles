@@ -6,6 +6,12 @@
 # Configure pacman (colorize and repos)
 - include_tasks: pacman.yml
 
+# SSH Keys
+- include_tasks: ssh_key.yml
+
+# bash
+- include_tasks: bash.yml
+
 # Switch CapsLock to Esc
 - include_tasks: keymap.yml
 

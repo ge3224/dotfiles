@@ -1,0 +1,9 @@
+# .bashrc
+- name: Ensure blocks sourced to .bashrc
+  blockinfile:
+    dest: /home/{{ username }}/.bashrc
+    marker: '# {mark} use keychain to manage ssh keys'
+    insertafter: EOF
+    create: yes 
+    block: |
+      eval $(keychain --eval --quiet id_ed25519)
