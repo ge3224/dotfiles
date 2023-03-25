@@ -2,10 +2,6 @@
 ## User info
 username: ge
 
-## SSH Key
-ssh_key_filename: id_ed25519
-
-
 ## AUR vars
 ## ===========================
 use_aur: True
@@ -17,7 +13,6 @@ aur:
         - figma-linux-bin
         - nerd-fonts-jetbrains-mono-160
         - syncthing-gtk
-        # - bubblemail # doesn't support two-factor
         - xnviewmp
         # - zoom # having error, but zoom installs manually?
 ## ===========================

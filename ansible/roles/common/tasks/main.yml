@@ -7,7 +7,7 @@
 - include_tasks: pacman.yml
 
 # SSH Keys (uncomment here and ansible/roles/main.yml)
-# - include_tasks: ssh_key.yml
+- include_tasks: ssh_key.yml
 
 # bash
 - include_tasks: bash.yml
