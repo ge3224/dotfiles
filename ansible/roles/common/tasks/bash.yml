@@ -1,5 +1,5 @@
 # .bashrc
-- name: Ensure blocks sourced to .bashrc
+- name: Use keychain .bashrc
   blockinfile:
     dest: /home/{{ username }}/.bashrc
     marker: '# {mark} use keychain to manage ssh keys'

@@ -6,8 +6,8 @@
 # Configure pacman (colorize and repos)
 - include_tasks: pacman.yml
 
-# SSH Keys
-- include_tasks: ssh_key.yml
+# SSH Keys (uncomment here and ansible/roles/main.yml)
+# - include_tasks: ssh_key.yml
 
 # bash
 - include_tasks: bash.yml
@@ -42,6 +42,7 @@
 # Setup GTK apps
 - include_tasks: gtk.yml
 
+# Install and setup office related packages
 - include_tasks: office.yml
 
 # Setup AUR
