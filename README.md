@@ -99,3 +99,12 @@ Setting up manually, since it's always a work in progress and I will be pushing 
 sudo pacman -Sy nodejs
 sudo pacman -Sy npm
 ```
+
+### Setting up bare git projects
+
+```
+mkdir <project>
+cd ./<project>
+git init --bare bare.git
+git clone ./bare.git main
+```
