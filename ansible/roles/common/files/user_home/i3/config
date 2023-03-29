@@ -205,3 +205,6 @@ bar {
 
 default_border pixel 0
 # default_border pixel 3
+
+# Start the browser
+bindsym $mod+b exec --no-startup-id brave
