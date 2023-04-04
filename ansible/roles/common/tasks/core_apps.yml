@@ -3,6 +3,8 @@
     name:
       - xorg
       - vlc
+      - brightnessctl
+      - ripgrep
       - tree
     state: present
 
@@ -18,7 +20,6 @@
       - bzip2
       - gzip
       - tar
-      - brightnessctl
     state: present
 
 - name: Install download utils
