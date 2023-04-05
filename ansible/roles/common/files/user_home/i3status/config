@@ -41,7 +41,7 @@ cpu_temperature 0 {
 }
 
 battery all {
-        integer_battery_capacity = true
+        # integer_battery_capacity = true
         # if false, will full capacity might be under 100% depending on age of the battery.
         last_full_capacity = true  
         hide_seconds = true
