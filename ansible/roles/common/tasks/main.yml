@@ -15,31 +15,22 @@
 # Switch CapsLock to Esc
 - include_tasks: keymap.yml
 
-# Create directories in /home/usr
 - include_tasks: home_directories.yml
 
-# Setup powermanagement
 - include_tasks: power_management.yml
 
-# Install core apps
 - include_tasks: core_apps.yml
 
-# Configure convenient USB mounting
 - include_tasks: usb.yml
 
-# Copy i3 config
 - include_tasks: i3.yml
 
-# Copy kitty config
 - include_tasks: kitty.yml
 
-# Configure lightdm
 - include_tasks: lightdm.yml
 
-# Setup GTK apps
 - include_tasks: gtk.yml
 
-# Install and setup office related packages
 - include_tasks: office.yml
 
 # Setup AUR
