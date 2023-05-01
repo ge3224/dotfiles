@@ -107,12 +107,13 @@ mkdir <project>
 cd ./<project>
 git init --bare bare.git
 git clone ./bare.git main
-cd ./bare.git
-git remote add origin <github repo>
-git push - origin main
-cd ../main
+cd ./main
 touch README.md
 git add -A
 git commit -m "Initial commit"
-git push --set-upstream origin main
+git push origin main
+cd ../bare.git
+git remote add origin <github repo>
+git branch -M main
+git push -u origin main
 ```
