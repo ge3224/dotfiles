@@ -39,9 +39,7 @@
 - name: Install core imaging apps
   community.general.pacman:
     name:
-      - gimp
       - imagemagick
-      - inkscape
       - nitrogen
       - redshift
       - picom

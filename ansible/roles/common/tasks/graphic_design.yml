@@ -1,0 +1,5 @@
+- name: Install open-source graphic design apps
+  community.general.pacman:
+    name:
+      - gimp
+      - inkscape
