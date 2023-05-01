@@ -14,6 +14,7 @@ aur:
         - figma-linux-bin
         - nerd-fonts-jetbrains-mono-160
         - syncthing-gtk
+        - pnpm-bin
         - xnviewmp
         # - zoom # having error, but zoom installs manually?
 ## ===========================
