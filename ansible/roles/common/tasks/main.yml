@@ -37,6 +37,8 @@
 
 - include_tasks: docker.yml
 
+- include_tasks: php.yml
+
 # Setup AUR
 - include_tasks: aur.yml
   when: use_aur == True

@@ -1,0 +1,5 @@
+- name: Install php, composer
+  community.general.pacman:
+    name:
+      - php
+      - composer
