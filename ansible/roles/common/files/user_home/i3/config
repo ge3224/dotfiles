@@ -208,3 +208,6 @@ default_border pixel 0
 
 # Start the browser
 bindsym $mod+b exec --no-startup-id brave
+
+# Float all Zoom windows
+for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
