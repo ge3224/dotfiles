@@ -9,7 +9,6 @@ use_aur: True
 aur:
     dir: aur
     packages:
-        - paru
         - brave-bin
         - figma-linux-bin
         - nerd-fonts-jetbrains-mono-160
@@ -17,5 +16,5 @@ aur:
         - syncthing-gtk
         - pnpm-bin
         - xnviewmp
-        # - zoom # having error, but zoom installs manually?
+        - zoom # having error, but zoom installs manually?
 ## ===========================

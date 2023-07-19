@@ -1,8 +1,6 @@
 - name: Install home office apps
   community.general.pacman:
     name: 
-      # email client
-      - evolution 
       # Word processing
       - libreoffice-fresh
       # Documents

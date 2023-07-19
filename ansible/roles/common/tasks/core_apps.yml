@@ -6,6 +6,7 @@
       - brightnessctl
       - ripgrep
       - tree
+      - bleachbit
     state: present
 
 - name: Install archival utils
