@@ -6,6 +6,7 @@
       - brightnessctl
       - ripgrep
       - tree
+      - rsync
       - bleachbit
     state: present
 
