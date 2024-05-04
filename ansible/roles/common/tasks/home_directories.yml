@@ -21,14 +21,6 @@
     group: "{{ username }}"
     mode: '0775'
 
-- name: Create 'Design' directory
-  ansible.builtin.file:
-    path: /home/{{ username }}/Design
-    state: directory
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: '0775'
-
 - name: Create 'Desktop' directory
   ansible.builtin.file:
     path: /home/{{ username }}/Desktop
