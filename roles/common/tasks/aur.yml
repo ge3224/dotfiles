@@ -12,7 +12,7 @@
     state: link
 
 - name: Create AUR directory
-  file: path=/home/{{ username }}/Downloads/{{ aur.dir }}
+  file: path=/home/{{ username }}/Projects/{{ aur.dir }}
         state=directory
         owner={{ username }}
         group={{ username }}

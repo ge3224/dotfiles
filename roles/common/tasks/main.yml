@@ -7,17 +7,17 @@
 - include_tasks: pacman.yml
 
 # SSH Keys (uncomment here and ansible/roles/main.yml)
-- include_tasks: ssh_key.yml
+# - include_tasks: ssh_key.yml
 
 # bash
-- include_tasks: bash.yml
+# - include_tasks: bash.yml
 
 # Switch CapsLock to Esc
 - include_tasks: keymap.yml
 
 - include_tasks: home_directories.yml
 
-- include_tasks: power_management.yml
+# - include_tasks: power_management.yml
 
 - include_tasks: core_apps.yml
 
@@ -27,17 +27,19 @@
 
 - include_tasks: kitty.yml
 
-- include_tasks: lightdm.yml
+- include_tasks: fonts.yml
+
+# - include_tasks: lightdm.yml
 
 - include_tasks: gtk.yml
 
-- include_tasks: office.yml
+# - include_tasks: office.yml
 
-- include_tasks: graphic_design.yml
+# - include_tasks: graphic_design.yml
 
-- include_tasks: docker.yml
+# - include_tasks: docker.yml
 
-- include_tasks: php.yml
+# - include_tasks: php.yml
 
 # Setup AUR
 - include_tasks: aur.yml

@@ -1,7 +1,7 @@
 # sudo cp -r ./backgrounds/* /usr/share/backgrounds/
 - name: Copy background images
   copy:
-    src: /home/{{ username }}/Projects/dotfiles/main/ansible/images/backgrounds/
+    src: /home/{{ username }}/Projects/dotfiles/main/images/backgrounds/
     dest: /usr/share/backgrounds/
     force: False
     owner: "{{ username }}"
@@ -11,7 +11,7 @@
 # sudo cp -r ./pixmaps/* /usr/share/pixmaps/
 - name: Copy pixmaps
   copy:
-    src: /home/{{ username }}/Projects/dotfiles/main/ansible/images/pixmaps/
+    src: /home/{{ username }}/Projects/dotfiles/main/images/pixmaps/
     dest: /usr/share/pixmaps/
     force: False
     owner: "{{ username }}"

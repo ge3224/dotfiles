@@ -13,6 +13,6 @@
 # Create a symlink
 - name: Creating a symlink from repo `kitty` to `~/.config`
   ansible.builtin.file:
-    src: /home/{{ username }}/Projects/dotfiles/main/ansible/roles/common/files/user_home/kitty
+    src: /home/{{ username }}/Projects/dotfiles/main/roles/common/files/user_home/kitty
     dest: /home/{{ username }}/.config/kitty
     state: link

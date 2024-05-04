@@ -23,7 +23,7 @@
 # Create a symlink
 - name: Creating a symlink from repo `.profile` to `~/`
   ansible.builtin.file:
-    src: /home/{{ username }}/Projects/dotfiles/main/ansible/roles/common/files/user_home/.profile
+    src: /home/{{ username }}/Projects/dotfiles/main/roles/common/files/user_home/.profile
     dest: /home/{{ username }}/.profile
     state: link
 

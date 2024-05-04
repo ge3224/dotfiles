@@ -16,10 +16,9 @@ general {
 
 # order += "ipv6"
 order += "volume master"
-order += "wireless _first_"
-# order += "ethernet _first_"
-# order += "disk /"
-order += "battery all"
+# order += "wireless _first_"
+order += "ethernet _first_"
+#order += "disk /"
 order += "load"
 order += "cpu_temperature 0"
 order += "cpu_usage"
@@ -40,26 +39,13 @@ cpu_temperature 0 {
 		format_above_threshold = " %degrees°C"
 }
 
-battery all {
-        # integer_battery_capacity = true
-        # if false, will full capacity might be under 100% depending on age of the battery.
-        last_full_capacity = true  
-        hide_seconds = true
-        format = "%status %percentage %remaining"
-        format_down = "No battery"
-        status_chr = "⚡CHR"
-        status_bat = "  BAT"
-        status_unk = "? UNK"
-        status_full = "☻ FULL"
-}
-
 cpu_usage {
 		format = "CPU %usage"
 }
 
 wireless _first_ {
-        format_up = "直%quality %essid (%ip)"
-        format_down = "睊 down"
+        format_up = "W: (%quality at %essid) %ip"
+        format_down = "W: down"
 }
 
 ethernet _first_ {
