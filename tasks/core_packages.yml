@@ -1,4 +1,5 @@
 - name: Install basic utils, shells, apps
+  become: yes
   community.general.pacman:
     name:
       - xorg
@@ -11,6 +12,7 @@
     state: present
 
 - name: Install archival utils
+  become: yes
   community.general.pacman:
     name: 
       - atool
@@ -25,6 +27,7 @@
     state: present
 
 - name: Install download utils
+  become: yes
   community.general.pacman:
     name:
       - curl
@@ -33,12 +36,14 @@
     state: present
 
 - name: Install xclip for Neovim to access clipboard
+  become: yes
   community.general.pacman:
     name:
       - xclip
     state: present
 
 - name: Install core imaging apps
+  become: yes
   community.general.pacman:
     name:
       - imagemagick

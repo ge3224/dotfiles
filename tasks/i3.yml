@@ -1,0 +1,99 @@
+---
+
+- name: Define pats for i3 configuration;
+  block:
+    - set_fact:
+        source1: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/i3"
+        source2: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/i3status"
+        source3: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/backgrounds"
+        destination1: "/home/{{ username }}/.config/i3"
+        destination2: "/home/{{ username }}/.config/i3status"
+        destination3: "/usr/share/backgrounds"
+
+- name: Check existence of i3 config
+  ansible.builtin.stat:
+    path: "{{ destination1 }}"
+  register: i3conf
+
+# - name: Display existence of i3 config
+#   debug:
+#     msg:
+#       - "i3 config does {{ 'exist' if i3conf.stat.exists else 'not exist' }}"
+#       - "i3 config is a {{ 'symlink' if i3conf.stat.islnk else 'regular file' }}"
+
+- name: Check existence of i3status config
+  ansible.builtin.stat:
+    path: "{{ destination2 }}"
+  register: i3statusconf
+
+# - name: Display existence of i3status config
+#   debug:
+#     msg:
+#       - "i3status config does {{ 'exist' if i3statusconf.stat.exists else 'not exist' }}"
+#       - "i3status config is a {{ 'symlink' if i3statusconf.stat.islnk else 'regular file' }}"
+
+- name: Remove i3 config if not a symlink
+  file:
+    path: "{{ destination1 }}"
+    state: absent
+  when: i3conf.stat.exists and not i3conf.stat.islnk
+
+- name: Remove i3status config if not a symlink
+  file:
+    path: "{{ destination2 }}"
+    state: absent
+  when: i3statusconf.stat.exists and not i3statusconf.stat.islnk
+
+- name: Check if i3 conf symlink target is correct
+  set_fact:
+    is_target1_correct: "{{ i3conf.stat.lnk_target == source1 }}"
+  when: i3conf.stat.exists and i3conf.stat.islnk
+
+# - name: Display result of i3 config symlink target check
+#   debug:
+#     msg: "i3 config symlink target is {{ 'correct' if is_target1_correct else 'incorrect' }}"
+#   when: i3conf.stat.exists and i3conf.stat.islnk
+
+- name: Check if i3status conf symlink target is correct
+  set_fact:
+    is_target2_correct: "{{ i3statusconf.stat.lnk_target == source2 }}"
+  when: i3statusconf.stat.exists and i3statusconf.stat.islnk
+
+# - name: Display result of i3status config symlink target check
+#   debug:
+#     msg: "i3status config symlink target is {{ 'correct' if is_target2_correct else 'incorrect' }}"
+#   when: i3statusconf.stat.exists and i3statusconf.stat.islnk
+
+- name: Unlink i3 config symlinki if target is incorrect
+  file:
+    path: "{{ destination1 }}"
+    state: absent
+  when: i3conf.stat.exists and i3conf.stat.islnk and not is_target1_correct
+
+- name: Unlink i3status config symlinki if target is incorrect
+  file:
+    path: "{{ destination2 }}"
+    state: absent
+  when: i3statusconf.stat.exists and i3statusconf.stat.islnk and not is_target2_correct
+
+- name: Create a i3 config symlink to correct file if needed
+  file:
+    src: "{{ source1 }}"
+    dest: "{{ destination1 }}"
+    state: link
+  when: not i3conf.stat.exists or not is_target1_correct|default(false)
+
+- name: Create a i3status config symlink to correct file if needed
+  file:
+    src: "{{ source2 }}"
+    dest: "{{ destination2 }}"
+    state: link
+  when: not i3statusconf.stat.exists or not is_target2_correct|default(false)
+
+- name: Copy backgrounds if not present
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: "{{ destination3 }}"
+  with_fileglob:
+    - "{{ source3 }}/*"

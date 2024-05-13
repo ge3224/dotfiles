@@ -35,8 +35,8 @@ exec --no-startup-id udiskie &
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec_always --no-startup-id xset dpms 0 0 300 &
-exec_always --no-startup-id xss-lock --transfer-sleep-lock -- convert /usr/share/backgrounds/qianfanggaoneng.jpg RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin --nofork &
-bindsym $mod+Shift+x exec convert /usr/share/backgrounds/qianfanggaoneng.jpg RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin
+exec_always --no-startup-id xss-lock --transfer-sleep-lock -- convert /usr/share/backgrounds/qianfanggaoneng.jpg RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin --color 000000 --nofork &
+bindsym $mod+Shift+x exec convert /usr/share/backgrounds/qianfanggaoneng.jpg RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin --color 000000
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.

@@ -1,0 +1,54 @@
+---
+
+- name: Install `kitty` terminal based emulator
+  become: yes
+  community.general.pacman:
+    name: 
+      - kitty
+    state: present
+
+- name: Define paths kitty configuration
+  block:
+    - set_fact:
+        source: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/kitty"
+        destination: "/home/{{ username }}/.config/kitty"
+
+- name: Check existence of kitty config
+  ansible.builtin.stat:
+    path: "{{ destination }}"
+  register: kittyconf
+
+# - name: Display existence of kitty config
+#   debug:
+#     msg: 
+#       - "kitty config does {{ 'exist' if kittyconf.stat.exists else 'not exist' }}"
+#       - "kitty config is a {{ 'symlink' if kittyconf.stat.islnk else 'regular file' }}"
+
+- name: Remove config if not a symlink
+  file:
+    path: "{{ destination }}"
+    state: absent
+  when: kittyconf.stat.exists and not kittyconf.stat.islnk
+
+- name: Check if symlink target is correct
+  set_fact:
+    is_target_correct: "{{ kittyconf.stat.lnk_target == source }}"
+  when: kittyconf.stat.exists and kittyconf.stat.islnk
+
+# - name: Display result of symlink target check
+#   debug: 
+#     msg: "Symlink target is {{ 'correct' if is_target_correct else 'incorrect' }}"
+#   when: kittyconf.stat.exists and kittyconf.stat.islnk
+
+- name: Unlink symlink if target is incorrect
+  file:
+    path: "{{ destination }}"
+    state: absent
+  when: kittyconf.stat.exists and kittyconf.stat.islnk and not is_target_correct
+
+- name: Create a symlink to correct file if needed
+  file:
+    src: "{{ source }}"
+    dest: "{{ destination }}"
+    state: link
+  when: not kittyconf.stat.exists or not is_target_correct|default(false)

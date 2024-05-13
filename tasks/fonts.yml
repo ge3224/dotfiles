@@ -1,4 +1,5 @@
 - name: Install ttf-jetbrains-mono-nerd package using pacman
+  become: yes
   pacman:
     name: ttf-jetbrains-mono-nerd
     state: present

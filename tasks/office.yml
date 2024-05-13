@@ -1,25 +1,23 @@
 - name: Install home office apps
+  become: yes
   community.general.pacman:
     name: 
-      # Word processing
       - libreoffice-fresh
-      # Documents
       - evince
-      # Social
-      - telegram-desktop
-      # for printers # https://www.youtube.com/watch?v=jnmCbEWNV1w
       - cups
       - system-config-printer
       - gutenprint
     state: present
 
-- name: start/enable cups
+- name: Start/enable cups
+  become: yes
   ansible.builtin.systemd:
     name: cups
     state: started
     enabled: true
 
-- name: adding existing user "{{ username }}" to group sudo
+- name: Add existing user to `wheel` and `lp` groups
+  become: yes
   ansible.builtin.user:
     name: "{{ username }}"
     groups: wheel,lp

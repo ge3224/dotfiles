@@ -1,0 +1,9 @@
+---
+
+- name: Install messaging apps
+  become: yes
+  community.general.pacman:
+    name:
+      - telegram-desktop
+      - signal-desktop
+    state: present
