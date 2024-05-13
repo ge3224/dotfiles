@@ -1,1 +1,3 @@
 /ansible/roles/library/aur
+inventory.yml
+roles/common/vars/vars.yml

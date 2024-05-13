@@ -1,0 +1,17 @@
+### Playbook Configuration Variables
+username: username
+
+## AUR vars
+use_aur: True
+
+aur:
+    dir: aur
+    packages:
+        # - brave-bin
+        # - figma-linux-bin
+        # - nerd-fonts-jetbrains-mono-160
+        # - nerd-fonts-sf-mono
+        - syncthing-gtk
+        - pnpm-bin
+        - xnviewmp
+        # - zoom # having error, but zoom installs manually?
