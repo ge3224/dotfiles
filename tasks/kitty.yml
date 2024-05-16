@@ -10,7 +10,7 @@
 - name: Define paths kitty configuration
   block:
     - set_fact:
-        source: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/kitty"
+        source: "/home/{{ username }}/Projects/dotfiles/main/files/home/kitty"
         destination: "/home/{{ username }}/.config/kitty"
 
 - name: Check existence of kitty config

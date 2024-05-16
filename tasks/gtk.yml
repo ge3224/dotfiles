@@ -28,7 +28,7 @@
 #
 # - name: register
 #   vars: 
-#     correct: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/.profile"
+#     correct: "/home/{{ username }}/Projects/dotfiles/main/files/home/.profile"
 #   set_fact: 
 #     is_target_correct: "{{ profile.stat.lnk_target == correct }}"
 #   when: profile.stat.exists and profile.stat.islnk
@@ -46,7 +46,7 @@
 #
 # - name: Create a symlink to the correct file if needed
 #   file:
-#     src: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/.profile"
+#     src: "/home/{{ username }}/Projects/dotfiles/main/files/home/.profile"
 #     dest: "/home/{{ username }}/.profile"
 #     state: link
 #   when: not profile.stat.exists or not is_target_correct|default(false)

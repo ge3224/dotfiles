@@ -1,11 +1,11 @@
 ---
 
-- name: Define pats for i3 configuration;
+- name: Define paths for i3 configuration;
   block:
     - set_fact:
-        source1: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/i3"
-        source2: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/i3status"
-        source3: "/home/{{ username }}/Projects/dotfiles/main/files/user_home/backgrounds"
+        source1: "/home/{{ username }}/Projects/dotfiles/main/files/home/i3"
+        source2: "/home/{{ username }}/Projects/dotfiles/main/files/home/i3status"
+        source3: "/home/{{ username }}/Projects/dotfiles/main/files/home/backgrounds"
         destination1: "/home/{{ username }}/.config/i3"
         destination2: "/home/{{ username }}/.config/i3status"
         destination3: "/usr/share/backgrounds"
