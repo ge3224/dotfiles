@@ -90,10 +90,22 @@
     state: link
   when: not i3statusconf.stat.exists or not is_target2_correct|default(false)
 
+- name: Check if backgrounds directory exists
+  stat:
+    path: "{{ destination3 }}"
+  register: backgrounds
+
+- name: Create backgrounds directory if needed
+  become: yes
+  file:
+    path: "{{ destination3 }}"
+    state: directory
+  when: not backgrounds.stat.exists
+
 - name: Copy backgrounds if not present
   become: yes
   copy:
     src: "{{ item }}"
-    dest: "{{ destination3 }}"
+    dest: "{{ destination3 }}/"
   with_fileglob:
     - "{{ source3 }}/*"

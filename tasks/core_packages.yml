@@ -51,3 +51,10 @@
       - redshift
       - picom
     state: present
+
+- name: Install Neovim
+  become: yes
+  community.general.pacman:
+    name:
+      - neovim
+    state: present
