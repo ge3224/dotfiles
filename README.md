@@ -11,6 +11,8 @@ configured correctly.
 - An Arch Linux distribution
 - Ansible installed
 - Git installed
+- A `vars.yml` file in the project root defining required keys (See [vars.example.yml](./vars.example.yml))
+- A inventory file defining hosts, e.g. `localhost` (See [inventory.example.yml](./inventory.example.yml))
 
 ## Usage
 
