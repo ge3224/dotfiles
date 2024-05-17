@@ -34,35 +34,25 @@
     path: "{{ destination }}"
   register: slick
 
-# - name: Display existence of slick greeter config
-#   debug: 
-#     msg:
-#       - "slick greeter config is {{ 'in place' if slick.stat.exists else 'not in place' }}"
+- name: Get checksum of source config
+  ansible.builtin.stat:
+    path: "{{ source }}"
+    checksum_algorithm: sha1
+  register: source_sum
 
-- name: Remove slick greeter config if not a symlink
-  become: yes
-  file:
+- name: Get checksum of destination config
+  ansible.builtin.stat:
     path: "{{ destination }}"
-    state: absent
-  when: slick.stat.exists and not slick.stat.islnk
+    checksum_algorithm: sha1
+  register: dest_sum
+  when: slick.stat.exists
 
-- name: Check if symlink target is correct
+- name: Copy the configuration file if different
   become: yes
-  set_fact:
-    is_target_correct: "{{ slick.stat.lnk_target == source }}"
-  when: slick.stat.exists and slick.stat.islnk
-
-- name: Unlink slick greeter config if target is incorrect
-  become: yes
-  file: 
-    path: "{{ destination }}"
-    state: absent
-  when: slick.stat.exists and slick.stat.islnk and not is_target_correct
-
-- name: Create symlink to correct file if needed
-  become: yes
-  file:
+  ansible.builtin.copy:
     src: "{{ source }}"
     dest: "{{ destination }}"
-    state: link
-  when: not slick.stat.exists or not is_target_correct|default(false)
+    owner: root
+    group: root
+    mode: '0644'
+  when: not slick.stat.exists or source_sum.stat.checksum != dest_sum.stat.checksum
