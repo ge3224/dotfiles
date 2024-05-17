@@ -1,119 +1,40 @@
-# Dotfiles for bijiben -- Arch Installation and Setup with Ansible
+# Dotfiles and Ansible Playbook 
 
-- [Laptops](https://wiki.archlinux.org/title/Laptop)
-- [Thinkpads](https://wiki.archlinux.org/title/Laptop/Lenovo)
+This repo contains dotfiles and an Ansible playbook for my Linux workstation
+set up. It automates the installation and configuration of essential software
+and settings. The dotfiles provide configuration for various tools, while the
+Ansible playbook ensures that all required packages are installed and
+configured correctly.
 
-## TODOS
+## Requirements
 
-- [x] Fix icons in LightDM Greeter
-- [ ] Configure power management
-- [x] Configure display brightness controls (i3)
-- [x] Setup [SSH Key/Keyring](https://wiki.archlinux.org/title/SSH_keys#SSH_agents) for [Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
-- [x] Email client
-- [x] Install Rust
-- [x] Install Golang
-- [x] Install nodejs
-- [ ] Virtual Box and Windows 10
-- [ ] Zsh
+- An Arch Linux distribution
+- Ansible installed
+- Git installed
 
-## Installing Arch
+## Usage
 
-### [Changing Terminal Fonts](https://wiki.archlinux.org/title/Linux_console#Fonts)
+1. Clone this repository:
 
-```
-sudo pacman -S terminus-font
-setfont ter-132n
+```bash
+git clone https://github.com/ge3224/dotfiles.git
+cd dotfiles
 ```
 
-### iwctl Cheatsheet
+2. Run the Ansible playbook:
 
-```
-# iwctl
-[iwd]# device list
-[iwd]# station <device> scan
-[iwd]# station <device> get-networks
-[iwd]# station <device> connect <SSID>
+```bash
+ansible-playbook -i inventory.yml main.yml --ask-become-pass
 ```
 
-## Misc Configuration & Setup
+Note: The `--ask-become-pass` flag prompts for the sudo password to perform administrative tasks.
 
-### Change Fn & (Left) Ctrl keys
+## Contributing
 
-- Enter Bios setup: Config > Keyboard/Mouse > Fn and Ctrl Key Swap
+If you have any improvements or fixes, please fork the repository, create a
+feature branch, and submit a pull request. Make sure to follow the existing
+code style and include descriptive commit messages.
 
-### Ansible Arch Setup
+## License
 
-#### Install Ansible
-
-```
-sudo pacman -S ansible
-```
-
-#### Running a Playbook
-
-```
-cd <project_folder>/ansible/roles
-ansible-playbook -K main.yml
-```
-
-Ref:
-
-* [Example](https://github.com/linuxpiper/ansible-arch-setup)
-* [Video](https://www.youtube.com/watch?v=H0cpE1Q_9N0)
-
-### Formatting USB stick
-
-- `lsblk` or use `df`
-- `sudo umount /dev/sdb1`
-- `sudo mkfs.vfat -F 32 /dev/sdb1`
-- Or use `sudo mkfs.vfat -F 32 -n 'name_for_your_pendrive' /dev/sdb1`
-
-### SSH Key setup
-
-Ansible will install `openssh`, `keychain` and create location to store keys. To complete the setup do the following:
-
-1. Generate a key:
-
-```
-$ ssh-keygen -t ed25519 -C "your_email@example.com"
-```
-
-2. Configure Keychain to manage ssh agent in `~/.bashrc`
-
-```
-$ eval $(keychain --eval --quiet id_ed25519 id_rsa ~/.keys/my_custom_key)
-```
-
-Ref:
-
-- [Arch Wiki - SSH Keys](https://wiki.archlinux.org/title/SSH_keys)
-- [Github Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-
-### Neovim config
-
-Setting up manually, since it's always a work in progress and I will be pushing commits via ssh.
-
-### Installing nodejs via pacman 
-
-```
-sudo pacman -Sy nodejs
-sudo pacman -Sy npm
-```
-
-### Setting up bare git projects
-
-```
-mkdir <project>
-cd ./<project>
-git init --bare bare.git
-git clone ./bare.git main
-cd ./main
-touch README.md
-git add -A
-git commit -m "Initial commit"
-git push origin main
-cd ../bare.git
-git remote add origin <github repo>
-git branch -M main
-git push -u origin main
-```
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
