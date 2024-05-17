@@ -1,0 +1,68 @@
+---
+
+- name: Install lightdm greeter
+  become: yes
+  community.general.pacman:
+    name: 
+      - lightdm-slick-greeter
+    state: present
+
+- name: Switch to slick greeter
+  become: yes
+  replace:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#greeter-session=.*$'
+    replace: 'greeter-session=lightdm-slick-greeter'
+
+- name: Set user-session to i3
+  become: yes
+  replace:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#user-session=.*$'
+    replace: 'user-session=i3'
+
+- name: Define path for slick greeter config
+  become: yes
+  block:
+    - set_fact:
+        source: "/home/{{ username }}/Projects/dotfiles/main/files/home/slick-greeter.conf"
+        destination: "/etc/lightdm/slick-greeter.conf"
+
+- name: Check existence of slick greeter config
+  become: yes
+  ansible.builtin.stat:
+    path: "{{ destination }}"
+  register: slick
+
+# - name: Display existence of slick greeter config
+#   debug: 
+#     msg:
+#       - "slick greeter config is {{ 'in place' if slick.stat.exists else 'not in place' }}"
+
+- name: Remove slick greeter config if not a symlink
+  become: yes
+  file:
+    path: "{{ destination }}"
+    state: absent
+  when: slick.stat.exists and not slick.stat.islnk
+
+- name: Check if symlink target is correct
+  become: yes
+  set_fact:
+    is_target_correct: "{{ slick.stat.lnk_target == source }}"
+  when: slick.stat.exists and slick.stat.islnk
+
+- name: Unlink slick greeter config if target is incorrect
+  become: yes
+  file: 
+    path: "{{ destination }}"
+    state: absent
+  when: slick.stat.exists and slick.stat.islnk and not is_target_correct
+
+- name: Create symlink to correct file if needed
+  become: yes
+  file:
+    src: "{{ source }}"
+    dest: "{{ destination }}"
+    state: link
+  when: not slick.stat.exists or not is_target_correct|default(false)
