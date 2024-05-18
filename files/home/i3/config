@@ -28,6 +28,8 @@ exec --no-startup-id redshift -l $(curl -s "https://location.services.mozilla.co
 exec --no-startup-id picom &
 exec --no-startup-id udiskie &
 
+set $i3lockwall i3lock -i /usr/share/backgrounds/qianfanggaoneng.png -t
+
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
@@ -35,8 +37,9 @@ exec --no-startup-id udiskie &
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec_always --no-startup-id xset dpms 0 0 300 &
-exec_always --no-startup-id xss-lock --transfer-sleep-lock -- convert /usr/share/backgrounds/qianfanggaoneng.jpg RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin --color 000000 --nofork &
-bindsym $mod+Shift+x exec convert /usr/share/backgrounds/qianfanggaoneng.jpg RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin --color 000000
+# exec_always --no-startup-id xss-lock --transfer-sleep-lock -- convert /usr/share/backgrounds/qianfanggaoneng.jpg RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin --color 000000 --nofork &
+# bindsym $mod+Shift+x exec convert /usr/share/backgrounds/qianfanggaoneng.jpg RGB:- | i3lock --raw 1920x1080:rgb --image /dev/stdin --color 000000
+bindsym $mod+Shift+x exec --no-startup-id $i3lockwall
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -165,7 +168,23 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# shutdown / restart / suspend ...
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (CTRL+s) shutdown
+
+mode "$mode_system" {
+        bindsym l exec --no-startup-id $i3lockwall, mode "default"
+        bindsym e exec --no-startup-id $i3-msg exit, mode "default"
+        bindsym s exec --no-startup-id $i3lockwall && systemctl suspend, mode "default"
+        bindsym h exec --no-startup-id $i3lockwall && systemctl hibernate, mode "default"
+        bindsym r exec --no-startup-id systemctl reboot, mode "default"
+        bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+BackSpace mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
