@@ -64,3 +64,6 @@
 
     - name: Install and enable docker daemon
       include_tasks: tasks/docker.yml
+
+    - name: Install and configure development tools
+      include_tasks: tasks/dev.yml

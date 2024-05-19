@@ -1,0 +1,7 @@
+- name: Install packages for front-end development
+  become: yes
+  community.general.pacman:
+    name:
+      - nodejs
+      - npm
+    state: present

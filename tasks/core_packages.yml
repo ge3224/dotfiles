@@ -58,3 +58,10 @@
     name:
       - neovim
     state: present
+
+- name: Install KeePassXC
+  become: yes
+  community.general.pacman:
+    name:
+      - keepassxc
+    state: present
