@@ -65,3 +65,10 @@
     name:
       - keepassxc
     state: present
+
+- name: Install Syncthing
+  become: yes
+  community.general.pacman:
+    name:
+      - syncthing
+    state: present
