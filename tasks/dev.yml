@@ -8,24 +8,12 @@
       - go
       - nodejs
       - npm
+      - pnpm
       - opam
       - python-pip
       - python-pipx
       - python-poetry
     state: present
-
-# pnpm
-
-- name: Check if pnpm has been installed
-  command: pnpm --version
-  register: pnpm_check
-  ignore_errors: true
-
-- name: Download and install pnpm
-  shell: curl -fsSL https://get.pnpm.io/install.sh | sh -
-  args:
-    executable: /bin/bash
-  when: pnpm_check.failed
 
 # Rust
 
