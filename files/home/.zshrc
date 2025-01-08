@@ -8,6 +8,8 @@ export HISTSIZE=100000000
 export SAVEHIST=$HISTSIZE
 export HISTFILE=$HOME/.local/zsh_history
 
+alias vim="nvim"
+
 # Cargo environment
 . "$HOME/.cargo/env"
 

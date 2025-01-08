@@ -59,7 +59,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec ghostty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -224,3 +224,5 @@ default_border pixel 0
 
 # Float all Zoom windows
 for_window [class="(.*join\?action\=join.*|.*zoom.*)"] floating enable
+
+for_window [class="Ghostty"] border pixel 1
