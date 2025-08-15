@@ -1,0 +1,24 @@
+- name: Install home office apps
+  become: yes
+  community.general.pacman:
+    name: 
+      - libreoffice-fresh
+      - evince
+      - cups
+      - system-config-printer
+      - gutenprint
+    state: present
+
+- name: Start/enable cups
+  become: yes
+  ansible.builtin.systemd:
+    name: cups
+    state: started
+    enabled: true
+
+- name: Add existing user to `wheel` and `lp` groups
+  become: yes
+  ansible.builtin.user:
+    name: "{{ username }}"
+    groups: wheel,lp
+    append: yes

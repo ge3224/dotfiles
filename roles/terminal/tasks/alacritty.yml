@@ -1,0 +1,14 @@
+---
+
+- name: Install `alacritty` terminal
+  become: yes
+  community.general.pacman:
+    name:
+      - alacritty
+    state: present
+
+- name: Define paths kitty configuration
+  block:
+    - set_fact:
+        source: "/home/{{ username }}/Projects/dotfiles/main/files/home/alacritty"
+        destination: "/home/{{ username }}/.config/alacritty"

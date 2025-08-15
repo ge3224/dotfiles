@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: Jacob Benison
+  description: Terminal emulator configuration role
+  company: Personal
+  license: MIT
+  min_ansible_version: '2.9'
+  platforms:
+    - name: Archlinux
+      versions:
+        - all
+  galaxy_tags:
+    - terminal
+    - kitty
+    - alacritty
+
+dependencies: []

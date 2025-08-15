@@ -1,0 +1,52 @@
+---
+
+- name: Install GTK packages
+  become: yes
+  community.general.pacman:
+    name: 
+      - lxappearance
+      - arc-solid-gtk-theme
+    state: present
+
+# - name: Determine existence of .profile
+#   ansible.builtin.stat:
+#     path: /home/{{ username }}/.profile
+#   register: profile
+#
+# # - name: Display results if .profile exists
+# #   debug: 
+# #     msg: 
+# #       - ".profile file is {{ 'present' if profile.stat.exists else 'absent' }}"
+# #       - ".profile file is a {{ 'symlink' if profile.stat.islnk else 'regular file' }}"
+#
+# - name: Remove .profile if it is not a symlink
+#   file: 
+#     path: /home/{{ username }}/.profile
+#     state: absent
+#   register: profile_removed
+#   when: profile.stat.exists and not profile.stat.islnk
+#
+# - name: register
+#   vars: 
+#     correct: "/home/{{ username }}/Projects/dotfiles/main/files/home/.profile"
+#   set_fact: 
+#     is_target_correct: "{{ profile.stat.lnk_target == correct }}"
+#   when: profile.stat.exists and profile.stat.islnk
+#
+# # - name: Display result of symlink target stat
+# #   debug:
+# #     msg: "Symlink target is {{ 'correct' if is_target_correct else 'incorrect' }}"
+# #   when: profile.stat.exists and profile.stat.islnk
+#
+# - name: Unlink symlink if symlink target is incorrect
+#   file:
+#     path: "/home/{{ username }}/.profile"
+#     state: absent
+#   when: profile.stat.exists and profile.stat.islnk and not is_target_correct
+#
+# - name: Create a symlink to the correct file if needed
+#   file:
+#     src: "/home/{{ username }}/Projects/dotfiles/main/files/home/.profile"
+#     dest: "/home/{{ username }}/.profile"
+#     state: link
+#   when: not profile.stat.exists or not is_target_correct|default(false)

@@ -1,0 +1,6 @@
+---
+- name: Install and configure development tools
+  include_tasks: dev.yml
+
+- name: Install and enable docker daemon
+  include_tasks: docker.yml

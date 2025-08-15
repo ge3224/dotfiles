@@ -4,66 +4,36 @@
 #
 # Description:
 #   This playbook is designed to preserve the state of my desktop environment
-#   by automating various configuration tasks.
+#   by automating various configuration tasks using Ansible roles.
 #
 # Author: Jacob Benison
 #
-# Version: 0.1.0
+# Version: 0.2.0
 #
-# Usage: ansible-playbook -i [inventory] main.yml
+# Usage: ansible-playbook -i inventory.yml main.yml
 #
 # Notes: 
-#   - Ensure tht the vars.yml file contains necessary variables before running
+#   - Ensure that the vars.yml file contains necessary variables before running
 #     the playbook.
+#   - Uses role-based organization following Ansible best practices
 
-- hosts: localhost
+- name: Configure Desktop Environment
+  hosts: localhost
+  become: false
+  
 
-  vars_files:
-    - vars.yml
-
-  tasks: 
-
-    - name: Configure pacman and update system
-      include_tasks: tasks/pacman.yml
-
-    - name: Include common home directories
-      include_tasks: tasks/home_dirs.yml
-
-    - name: Configure keyboard
-      include_tasks: tasks/keyboard.yml
-
-    - name: Install core packages
-      include_tasks: tasks/core_packages.yml
-
-    - name: Configure UX for USB
-      include_tasks: tasks/usb.yml
-
-    - name: Set up GTK
-      include_tasks: tasks/gtk.yml
-
-    - name: Install required fonts
-      include_tasks: tasks/fonts.yml
-
-    - name: Set up configuration of `i3`
-      include_tasks: tasks/i3.yml
-
-    - name: Set up `lightdm` configuration
-      include_tasks: tasks/lightdm.yml
-
-    - name: Install and configure `kitty`
-      include_tasks: tasks/kitty.yml
-
-    - name: Install office software
-      include_tasks: tasks/office.yml
-
-    - name: Install social media clients
-      include_tasks: tasks/social.yml
-
-    - name: Install graphics software
-      include_tasks: tasks/graphics.yml
-
-    - name: Install and enable docker daemon
-      include_tasks: tasks/docker.yml
-
-    - name: Install and configure development tools
-      include_tasks: tasks/dev.yml
+  roles:
+    - role: system
+      tags: ['system', 'base']
+    
+    - role: desktop
+      tags: ['desktop', 'ui']
+    
+    - role: terminal
+      tags: ['terminal', 'shell']
+    
+    - role: development
+      tags: ['development', 'dev', 'docker']
+    
+    - role: multimedia
+      tags: ['multimedia', 'apps', 'office', 'social', 'graphics']

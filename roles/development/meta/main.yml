@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Jacob Benison
+  description: Development tools and environment configuration
+  company: Personal
+  license: MIT
+  min_ansible_version: '2.9'
+  platforms:
+    - name: Archlinux
+      versions:
+        - all
+  galaxy_tags:
+    - development
+    - docker
+    - dev-tools
+
+dependencies:
+  - role: system

@@ -1,0 +1,9 @@
+---
+- name: Install graphics software
+  include_tasks: graphics.yml
+
+- name: Install office software
+  include_tasks: office.yml
+
+- name: Install social media clients
+  include_tasks: social.yml

@@ -1,0 +1,30 @@
+---
+
+- name: Install Docker and Docker Compose
+  become: yes
+  community.general.pacman:
+    name:
+      - docker
+      - docker-compose
+    state: present
+
+- name: Start/enable `docker` service
+  become: yes
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+    enabled: true
+
+# https://docs.docker.com/engine/install/linux-postinstall/
+- name: Ensure a `docker` group exists
+  become: yes
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Add user to the `docker` group
+  become: yes
+  ansible.builtin.user:
+    name: "{{ username }}"
+    groups: docker
+    append: yes

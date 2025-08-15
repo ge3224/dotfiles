@@ -1,0 +1,6 @@
+---
+- name: Install and configure kitty
+  include_tasks: kitty.yml
+
+- name: Install and configure alacritty
+  include_tasks: alacritty.yml

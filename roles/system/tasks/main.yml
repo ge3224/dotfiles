@@ -1,0 +1,15 @@
+---
+- name: Configure pacman and update system
+  include_tasks: pacman.yml
+
+- name: Install core packages
+  include_tasks: packages.yml
+
+- name: Setup common home directories
+  include_tasks: home_dirs.yml
+
+- name: Configure keyboard
+  include_tasks: keyboard.yml
+
+- name: Configure UX for USB
+  include_tasks: usb.yml

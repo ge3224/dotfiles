@@ -1,0 +1,58 @@
+---
+
+- name: Install lightdm greeter
+  become: yes
+  community.general.pacman:
+    name: 
+      - lightdm-slick-greeter
+    state: present
+
+- name: Switch to slick greeter
+  become: yes
+  replace:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#greeter-session=.*$'
+    replace: 'greeter-session=lightdm-slick-greeter'
+
+- name: Set user-session to i3
+  become: yes
+  replace:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^#user-session=.*$'
+    replace: 'user-session=i3'
+
+- name: Define path for slick greeter config
+  become: yes
+  block:
+    - set_fact:
+        source: "/home/{{ username }}/Projects/dotfiles/main/files/home/slick-greeter.conf"
+        destination: "/etc/lightdm/slick-greeter.conf"
+
+- name: Check existence of slick greeter config
+  become: yes
+  ansible.builtin.stat:
+    path: "{{ destination }}"
+  register: slick
+
+- name: Get checksum of source config
+  ansible.builtin.stat:
+    path: "{{ source }}"
+    checksum_algorithm: sha1
+  register: source_sum
+
+- name: Get checksum of destination config
+  ansible.builtin.stat:
+    path: "{{ destination }}"
+    checksum_algorithm: sha1
+  register: dest_sum
+  when: slick.stat.exists
+
+- name: Copy the configuration file if different
+  become: yes
+  ansible.builtin.copy:
+    src: "{{ source }}"
+    dest: "{{ destination }}"
+    owner: root
+    group: root
+    mode: '0644'
+  when: not slick.stat.exists or source_sum.stat.checksum != dest_sum.stat.checksum
