@@ -1,6 +1,0 @@
-- name: Switch CapsLock to Esc
-  become: yes
-  replace:
-    path: /etc/X11/xorg.conf.d/00-keyboard.conf
-    regexp: '"terminate:ctrl_alt_bksp"$'
-    replace: '"terminate:ctrl_alt_bksp,caps:escape_shifted_capslock"'

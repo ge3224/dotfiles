@@ -1,9 +1,0 @@
----
-
-- name: Install graphics software
-  become: yes
-  community.general.pacman:
-    name:
-      - gimp
-      - inkscape
-    state: present

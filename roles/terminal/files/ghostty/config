@@ -1,5 +1,0 @@
-command = /usr/bin/zsh --login --interactive
-shell-integration = zsh
-
-window-decoration = false
-theme = kanagawabones

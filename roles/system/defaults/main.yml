@@ -1,5 +1,0 @@
----
-# Default variables for system role
-pacman:
-  repos:
-    - multilib
