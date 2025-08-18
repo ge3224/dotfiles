@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+log() {
+    echo "[NETWORKING] $1"
+}
+
+log "Installing core Linux networking tools..."
+
+# Core networking utilities
+packages=(
+    "iproute2"          # ip, ss, tc commands
+    "net-tools"         # netstat, ifconfig (legacy but still useful)
+    "bind-tools"        # dig, nslookup, host
+    "traceroute"        # traceroute
+    "tcpdump"           # packet capture
+    "nmap"              # network scanning
+    "wget"              # web requests
+    "curl"              # web requests and API testing
+    "openssh"           # ssh client
+    "rsync"             # file synchronization
+    "gnu-netcat"            # network debugging
+    "wireshark-cli"     # tshark for packet analysis
+    "iperf3"            # network performance testing
+    "mtr"               # combined ping/traceroute
+    "whois"             # domain information
+    "inetutils"            # telnet client
+)
+
+log "Installing packages: ${packages[*]}"
+
+if command -v pacman >/dev/null 2>&1; then
+    sudo pacman -S --needed --noconfirm "${packages[@]}"
+else
+    log "ERROR: No supported package manager found (pacman)"
+    exit 1
+fi
+
+log "Core networking tools installation completed!"
+log "Available tools: ip, ss, netstat, dig, traceroute, tcpdump, nmap, wget, curl, ssh, rsync, nc, tshark, iperf3, mtr, whois, telnet"
