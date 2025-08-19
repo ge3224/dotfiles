@@ -16,8 +16,9 @@ if [ -f "$HOME/.bashrc" ] && [ ! -L "$HOME/.bashrc" ]; then
     cp "$HOME/.bashrc" "$HOME/.bashrc.backup"
 fi
 
-# Create symlink
+# Create symlinks
 ln -sf "$DOTFILES_DIR/files/home/.bashrc" "$HOME/.bashrc"
+ln -sf "$DOTFILES_DIR/files/home/.blerc" "$HOME/.blerc"
 
 # Install ble.sh for syntax highlighting
 echo "Installing ble.sh for syntax highlighting..."
