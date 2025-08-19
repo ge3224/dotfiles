@@ -19,5 +19,26 @@ fi
 # Create symlink
 ln -sf "$DOTFILES_DIR/files/home/.bashrc" "$HOME/.bashrc"
 
+# Install ble.sh for syntax highlighting
+echo "Installing ble.sh for syntax highlighting..."
+if [ ! -d "$HOME/.local/share/blesh" ]; then
+    # Clone ble.sh repository
+    if [ -d "ble.sh" ]; then
+        rm -rf ble.sh
+    fi
+    
+    git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git
+    
+    # Install ble.sh
+    make -C ble.sh install PREFIX="$HOME/.local"
+    
+    # Clean up clone
+    rm -rf ble.sh
+    
+    echo "ble.sh installed successfully!"
+else
+    echo "ble.sh already installed, skipping..."
+fi
+
 echo "Bash configuration installed successfully!"
 echo "Restart your terminal or run 'source ~/.bashrc' to apply changes."
