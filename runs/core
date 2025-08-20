@@ -28,6 +28,7 @@ packages=(
     "make"                  # Build automation
     "pkgconf"               # Compiler flags
     "lshw"                  # Hardware info
+    "xdg-user-dirs"         # Default user directories
 )
 
 log "Installing packages: ${packages[*]}"
@@ -38,5 +39,8 @@ else
     log "ERROR: No supported package manager found (pacman)"
     exit 1
 fi
+
+log "Creating default XDG user directories..."
+xdg-user-dirs-update
 
 log "Core tools installation completed!"
