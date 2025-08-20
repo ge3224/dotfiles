@@ -1,0 +1,3 @@
+[submodule "aur/claude-code"]
+	path = aur/claude-code
+	url = https://aur.archlinux.org/claude-code.git
