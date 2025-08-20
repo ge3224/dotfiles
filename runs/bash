@@ -17,7 +17,7 @@ if [ -f "$HOME/.bashrc" ] && [ ! -L "$HOME/.bashrc" ]; then
 fi
 
 # Create symlinks
-ln -sf "$DOTFILES_DIR/files/home/.bashrc" "$HOME/.bashrc"
+ln -sf "$DOTFILES_DIR/files/.bashrc" "$HOME/.bashrc"
 
 echo "Bash configuration installed successfully!"
 echo "Restart your terminal or run 'source ~/.bashrc' to apply changes."
