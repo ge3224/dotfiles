@@ -1,3 +1,6 @@
 [submodule "aur/claude-code"]
 	path = aur/claude-code
 	url = https://aur.archlinux.org/claude-code.git
+[submodule "aur/zen-browser-bin"]
+	path = aur/zen-browser-bin
+	url = https://aur.archlinux.org/zen-browser-bin.git
