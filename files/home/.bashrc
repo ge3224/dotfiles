@@ -2,11 +2,10 @@
 # ~/.bashrc
 #
 
+set -o vi
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
-# Load ble.sh for syntax highlighting (if installed)
-[[ $- == *i* ]] && source ~/.local/share/blesh/ble.sh --noattach
 
 # Enhanced tab completion
 if [ -f /etc/bash_completion ]; then
@@ -55,6 +54,3 @@ bind '"\e[B": history-search-forward'
 # Kanagawa-themed prompt
 # Shows: [user@host] /current/path $ 
 PS1='\[\e[38;2;114;113;105m\][\[\e[38;2;126;156;216m\]\u\[\e[38;2;114;113;105m\]@\[\e[38;2;152;187;108m\]\h\[\e[38;2;114;113;105m\]] \[\e[38;2;230;195;132m\]\w\[\e[38;2;220;215;186m\] \$ \[\e[0m\]'
-
-# Attach ble.sh (must be at end of .bashrc)
-[[ ${BLE_VERSION-} ]] && ble-attach
