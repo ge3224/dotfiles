@@ -7,3 +7,6 @@
 [submodule "aur/gemini-cli-bin"]
 	path = aur/gemini-cli-bin
 	url = https://aur.archlinux.org/gemini-cli-bin.git
+[submodule "aur/tmux-sessionizer"]
+	path = aur/tmux-sessionizer
+	url = https://aur.archlinux.org/tmux-sessionizer.git
