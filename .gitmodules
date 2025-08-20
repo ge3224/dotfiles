@@ -4,3 +4,6 @@
 [submodule "aur/zen-browser-bin"]
 	path = aur/zen-browser-bin
 	url = https://aur.archlinux.org/zen-browser-bin.git
+[submodule "aur/gemini-cli-bin"]
+	path = aur/gemini-cli-bin
+	url = https://aur.archlinux.org/gemini-cli-bin.git
