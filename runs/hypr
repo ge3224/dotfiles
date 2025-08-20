@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Hyprland Configuration Run
+# Symlinks custom hyprland.conf file
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+
+echo "Setting up hyprland configuration..."
+
+# Create .config/hypr directory if it doesn't exist
+mkdir -p "$HOME/.config/hypr"
+
+# Backup existing hyprland.conf if it exists and isn't a symlink
+if [ -f "$HOME/.config/hypr/hyprland.conf" ] && [ ! -L "$HOME/.config/hypr/hyprland.conf" ]; then
+    echo "Backing up existing hyprland.conf to hyprland.conf.backup"
+    cp "$HOME/.config/hypr/hyprland.conf" "$HOME/.config/hypr/hyprland.conf.backup"
+fi
+
+# Create symlink from dotfiles
+echo "Creating symlink to hyprland.conf"
+ln -sf "$DOTFILES_DIR/files/hypr/hyprland.conf" "$HOME/.config/hypr/hyprland.conf"
+
+echo "Hyprland configuration installed successfully!"
