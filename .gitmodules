@@ -7,3 +7,6 @@
 [submodule "aur/gemini-cli-bin"]
 	path = aur/gemini-cli-bin
 	url = https://aur.archlinux.org/gemini-cli-bin.git
+[submodule "files/nvim"]
+	path = files/nvim
+	url = git@github.com:ge3224/nvimconf.git
