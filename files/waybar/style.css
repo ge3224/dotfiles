@@ -45,7 +45,7 @@
 
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 13px;
+    font-size: 14px;
     min-height: 0;
     padding: 0;
     border: none;
@@ -61,7 +61,7 @@
 }
 
 #workspaces button {
-    padding: 0 0.5rem;
+    padding: 0 0.3rem;
     background-color: transparent;
     color: @springBlue;
     border-radius: 3px;
@@ -91,9 +91,10 @@
 #wireplumber,
 #network,
 #cpu,
-#memory {
+#memory,
+#temperature {
     background-color: @waveBlue1;
-    padding: 0.5rem 1rem;
+    padding: 0.3rem 0.6rem;
     border-radius: 3px;
 }
 
@@ -128,6 +129,8 @@
 #network {
     color: @springBlue;
     margin-left: 0.5rem;
+    padding-right: 0.3rem;
+    padding-left: 0.7rem;
 }
 
 #network.disconnected {
@@ -157,5 +160,14 @@
 }
 
 #memory.critical {
+    color: @samuraiRed;
+}
+
+#temperature {
+    color: @springBlue;
+    margin-left: 0.5rem;
+}
+
+#temperature.critical {
     color: @samuraiRed;
 }
