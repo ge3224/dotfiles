@@ -31,6 +31,7 @@ packages=(
     "xdg-user-dirs"         # Default user directories
     "nwg-look"              # GTK theme manager
     "waybar"                # Status bar for Wayland
+    "keepassxc"             # Password manager
 )
 
 log "Installing packages: ${packages[*]}"
