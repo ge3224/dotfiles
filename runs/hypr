@@ -24,3 +24,64 @@ echo "Creating symlink to hyprland.conf"
 ln -sf "$DOTFILES_DIR/files/hypr/hyprland.conf" "$HOME/.config/hypr/hyprland.conf"
 
 echo "Hyprland configuration installed successfully!"
+
+# Setup Nvidia kernel parameters if Nvidia GPU is detected
+echo "Checking for Nvidia GPU..."
+if lsmod | grep -q nvidia 2>/dev/null || [ -d "/proc/driver/nvidia" ] || pacman -Q nvidia-open-dkms >/dev/null 2>&1; then
+    echo "✅ Nvidia GPU detected, configuring kernel parameters..."
+
+    # Detect bootloader and add required kernel parameters
+    if [ -d "/boot/loader/entries" ]; then
+        # systemd-boot
+        echo "Detected systemd-boot, checking kernel parameters..."
+        BOOT_ENTRY="/boot/loader/entries/arch.conf"
+
+        if [ -f "$BOOT_ENTRY" ]; then
+            if ! grep -q "nvidia_drm.modeset=1" "$BOOT_ENTRY" || ! grep -q "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "$BOOT_ENTRY"; then
+                echo "⚠️  Required Nvidia kernel parameters missing from $BOOT_ENTRY"
+                echo "Please add these parameters to your boot entry:"
+                echo "  nvidia_drm.modeset=1 nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+            else
+                echo "✅ Nvidia kernel parameters already configured"
+            fi
+        fi
+    elif [ -f "/etc/default/grub" ]; then
+        # GRUB
+        echo "Detected GRUB, checking kernel parameters..."
+
+        if ! grep -q "nvidia_drm.modeset=1" /etc/default/grub || ! grep -q "nvidia.NVreg_PreserveVideoMemoryAllocations=1" /etc/default/grub; then
+            echo "⚠️  Required Nvidia kernel parameters missing from GRUB config"
+            echo "Adding kernel parameters to GRUB..."
+            
+            # Create backup
+            sudo cp /etc/default/grub /etc/default/grub.backup-$(date +%Y%m%d-%H%M%S)
+            
+            # Get current GRUB_CMDLINE_LINUX_DEFAULT line
+            CURRENT_LINE=$(grep "^GRUB_CMDLINE_LINUX_DEFAULT=" /etc/default/grub)
+            
+            # Add our parameters if not already present
+            if ! echo "$CURRENT_LINE" | grep -q "nvidia_drm.modeset=1"; then
+                # Remove the closing quote, add our params, add closing quote back
+                UPDATED_LINE=$(echo "$CURRENT_LINE" | sed 's/"$/ nvidia_drm.modeset=1 nvidia.NVreg_PreserveVideoMemoryAllocations=1"/')
+                sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|$UPDATED_LINE|" /etc/default/grub
+                
+                echo "✅ Added Nvidia kernel parameters to GRUB config"
+                echo "Regenerating GRUB configuration..."
+                sudo grub-mkconfig -o /boot/grub/grub.cfg
+                echo "✅ GRUB configuration updated successfully"
+                echo "⚠️  REBOOT REQUIRED for kernel parameter changes to take effect"
+            fi
+        else
+            echo "✅ Nvidia kernel parameters already configured in GRUB"
+        fi
+    else
+        echo "⚠️  Could not detect bootloader. Please manually add kernel parameters:"
+        echo "  nvidia_drm.modeset=1 nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    fi
+else
+    echo "❌ No Nvidia GPU detected, skipping kernel parameter setup"
+    echo "Debug info:"
+    echo "  - lsmod nvidia: $(lsmod | grep nvidia | wc -l) modules"
+    echo "  - /proc/driver/nvidia: $([ -d "/proc/driver/nvidia" ] && echo "exists" || echo "missing")"
+    echo "  - nvidia-open-dkms package: $(pacman -Q nvidia-open-dkms 2>/dev/null || echo "not found")"
+fi
