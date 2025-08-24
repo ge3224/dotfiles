@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Waybar Configuration Run
+# Sets up waybar configuration with symlinks
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+
+echo "Setting up waybar configuration..."
+
+# Create waybar config directory
+mkdir -p "$HOME/.config/waybar"
+
+# Handle existing waybar config
+if [ -e "$HOME/.config/waybar/config.jsonc" ]; then
+    if [ -L "$HOME/.config/waybar/config.jsonc" ]; then
+        echo "Existing waybar config is already a symlink, removing it"
+        rm "$HOME/.config/waybar/config.jsonc"
+    else
+        echo "Backing up existing waybar config to .config/waybar/config.jsonc.backup"
+        mv "$HOME/.config/waybar/config.jsonc" "$HOME/.config/waybar/config.jsonc.backup"
+    fi
+fi
+
+if [ -e "$HOME/.config/waybar/style.css" ]; then
+    if [ -L "$HOME/.config/waybar/style.css" ]; then
+        echo "Existing waybar style is already a symlink, removing it"
+        rm "$HOME/.config/waybar/style.css"
+    else
+        echo "Backing up existing waybar style to .config/waybar/style.css.backup"
+        mv "$HOME/.config/waybar/style.css" "$HOME/.config/waybar/style.css.backup"
+    fi
+fi
+
+# Create symlinks from dotfiles
+echo "Creating symlinks to waybar config files"
+ln -sf "$DOTFILES_DIR/files/waybar/config.jsonc" "$HOME/.config/waybar/config.jsonc"
+ln -sf "$DOTFILES_DIR/files/waybar/style.css" "$HOME/.config/waybar/style.css"
+
+echo "Waybar configuration setup completed!"
+echo "Restart waybar with: killall waybar && waybar &"

@@ -29,6 +29,8 @@ packages=(
     "pkgconf"               # Compiler flags
     "lshw"                  # Hardware info
     "xdg-user-dirs"         # Default user directories
+    "nwg-look"              # GTK theme manager
+    "waybar"                # Status bar for Wayland
 )
 
 log "Installing packages: ${packages[*]}"
