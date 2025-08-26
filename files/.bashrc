@@ -7,6 +7,9 @@ set -o vi
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Add ~/.local/bin to PATH
+export PATH="$HOME/.local/bin:$PATH"
+
 # Enhanced tab completion
 if [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
