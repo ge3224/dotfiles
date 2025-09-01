@@ -32,6 +32,7 @@ packages=(
     "nwg-look"              # GTK theme manager
     "waybar"                # Status bar for Wayland
     "keepassxc"             # Password manager
+    "imagemagick"           # Image manipulation suite
 )
 
 log "Installing packages: ${packages[*]}"

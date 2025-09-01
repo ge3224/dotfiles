@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+log() {
+    echo "[APPS] $1"
+}
+
+log "Installing common desktop applications..."
+
+# Common applications and tools
+packages=(
+    "gimp"                  # Image editing
+    "inkscape"              # Vector graphics
+    "gthumb"                # Photo management
+    "vlc"                   # Media player
+    "firefox"               # Web browser
+    "libreoffice-fresh"     # Office suite
+    "obs-studio"            # Screen recording/streaming
+    "evince"                # PDF viewer
+    "qbittorrent"          # BitTorrent client
+)
+
+log "Installing packages: ${packages[*]}"
+
+if command -v pacman >/dev/null 2>&1; then
+    # Update package database first
+    sudo pacman -Sy
+    
+    # Install packages
+    sudo pacman -S --needed --noconfirm "${packages[@]}" || {
+        log "Some packages failed to install, continuing..."
+    }
+else
+    log "ERROR: No supported package manager found (pacman)"
+    exit 1
+fi
+
+log "Desktop applications installation completed!"
+log "Installed applications:"
+log "  Graphics: GIMP, Inkscape, gThumb"
+log "  Media: VLC, OBS Studio"
+log "  Productivity: LibreOffice"
+log "  Web: Firefox"
