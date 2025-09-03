@@ -16,7 +16,10 @@ packages=(
     "libreoffice-fresh"     # Office suite
     "obs-studio"            # Screen recording/streaming
     "evince"                # PDF viewer
-    "qbittorrent"          # BitTorrent client
+    "qbittorrent"           # BitTorrent client
+    "signal-desktop"        # Signal messaging
+    "obsidian"              # Markdown editor
+    "syncthing"             # File syncing
 )
 
 log "Installing packages: ${packages[*]}"
