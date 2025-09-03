@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+log() {
+    echo "[GRUB] $1"
+}
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(dirname "$SCRIPT_DIR")"
+GRUB_CONFIG="$REPO_ROOT/files/grub/grub"
+SYSTEM_GRUB="/etc/default/grub"
+
+log "Configuring GRUB bootloader..."
+
+# Check if GRUB config exists in repo
+if [[ ! -f "$GRUB_CONFIG" ]]; then
+    log "ERROR: GRUB config not found at $GRUB_CONFIG"
+    exit 1
+fi
+
+# Backup existing GRUB config if it exists
+if [[ -f "$SYSTEM_GRUB" && ! -L "$SYSTEM_GRUB" ]]; then
+    log "Backing up existing GRUB config to ${SYSTEM_GRUB}.backup"
+    sudo cp "$SYSTEM_GRUB" "${SYSTEM_GRUB}.backup"
+fi
+
+# Remove existing config if it's a regular file
+if [[ -f "$SYSTEM_GRUB" && ! -L "$SYSTEM_GRUB" ]]; then
+    sudo rm "$SYSTEM_GRUB"
+fi
+
+# Create symlink to our config
+log "Creating symlink from $SYSTEM_GRUB to $GRUB_CONFIG"
+sudo ln -sf "$GRUB_CONFIG" "$SYSTEM_GRUB"
+
+# Regenerate GRUB configuration
+log "Regenerating GRUB configuration..."
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+log "GRUB configuration completed!"
+log "Key changes:"
+log "  - Set specific resolution (1920x1080) for better font rendering"
+log "  - Preserved all existing boot parameters"
+log "  - Backup created at ${SYSTEM_GRUB}.backup"
+log ""
+log "Reboot to see changes take effect."
