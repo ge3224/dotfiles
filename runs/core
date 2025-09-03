@@ -47,4 +47,23 @@ fi
 log "Creating default XDG user directories..."
 xdg-user-dirs-update
 
+# Configure pacman
+log "Configuring pacman..."
+
+# Enable colorized output and verbose package lists
+log "Enabling pacman color and verbose output..."
+sudo sed -i 's/^#Color$/Color/' /etc/pacman.conf
+sudo sed -i 's/^#VerbosePkgLists$/VerbosePkgLists/' /etc/pacman.conf
+
+# Enable multilib repository (common configuration)
+log "Enabling multilib repository..."
+sudo sed -i '/^#\[multilib\]$/,/^#Include = \/etc\/pacman.d\/mirrorlist$/ {
+    s/^#\[multilib\]$/[multilib]/
+    s/^#Include = \/etc\/pacman.d\/mirrorlist$/Include = \/etc\/pacman.d\/mirrorlist/
+}' /etc/pacman.conf
+
+# Update system
+log "Running system update..."
+sudo pacman -Syu --noconfirm
+
 log "Core tools installation completed!"
