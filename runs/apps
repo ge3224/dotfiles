@@ -6,6 +6,26 @@ log() {
 
 log "Installing common desktop applications..."
 
+# Language tools and development environments
+dev_packages=(
+    "dart"                  # Dart programming language
+    "go"                    # Go programming language
+    "nodejs"                # Node.js runtime
+    "npm"                   # Node package manager
+    "pnpm"                  # Fast, disk space efficient package manager
+    "opam"                  # OCaml package manager
+    "python-pip"            # Python package installer
+    "python-pipx"           # Install and run Python applications in isolated environments
+    "python-poetry"         # Python dependency management and packaging
+    "gcc"                   # GNU Compiler Collection (C/C++)
+    "clang"                 # LLVM C/C++ compiler
+    "make"                  # Build automation tool
+    "cmake"                 # Cross-platform build system
+    "gdb"                   # GNU Debugger
+    "valgrind"              # Memory debugging and profiling tool
+    "zig"                   # Zig programming language
+)
+
 # Common applications and tools
 packages=(
     "gimp"                  # Image editing
@@ -20,22 +40,126 @@ packages=(
     "signal-desktop"        # Signal messaging
     "obsidian"              # Markdown editor
     "syncthing"             # File syncing
+    "podman"                # Container runtime
+    "podman-compose"        # Docker Compose alternative for Podman
 )
 
-log "Installing packages: ${packages[*]}"
+log "Installing development packages: ${dev_packages[*]}"
+log "Installing application packages: ${packages[*]}"
 
 if command -v pacman >/dev/null 2>&1; then
     # Update package database first
     sudo pacman -Sy
     
-    # Install packages
+    # Install development packages first
+    sudo pacman -S --needed --noconfirm "${dev_packages[@]}" || {
+        log "Some development packages failed to install, continuing..."
+    }
+    
+    # Install application packages
     sudo pacman -S --needed --noconfirm "${packages[@]}" || {
-        log "Some packages failed to install, continuing..."
+        log "Some application packages failed to install, continuing..."
     }
 else
     log "ERROR: No supported package manager found (pacman)"
     exit 1
 fi
+
+# OCaml development setup
+log "Setting up OCaml development environment..."
+
+# Check if opam is initialized
+if [[ ! -d "$HOME/.opam" ]]; then
+    log "Initializing opam..."
+    opam init -y
+    eval $(opam env)
+fi
+
+# Install OCaml development tools
+ocaml_packages=("odoc" "ocamlformat" "utop")
+for package in "${ocaml_packages[@]}"; do
+    if ! opam list --installed "$package" >/dev/null 2>&1; then
+        log "Installing OCaml package: $package"
+        opam install -y "$package"
+    else
+        log "OCaml package $package already installed"
+    fi
+done
+
+# Helper function to update shell profiles
+update_shell_profiles() {
+    local line_to_add="$1"
+    local profiles=("$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.profile")
+    
+    for profile in "${profiles[@]}"; do
+        if [[ -f "$profile" ]] && ! grep -Fq "$line_to_add" "$profile"; then
+            log "Adding PATH export to $profile"
+            echo "$line_to_add" >> "$profile"
+        fi
+    done
+}
+
+# Deno development setup
+log "Setting up Deno..."
+
+# Check if Deno is installed
+if ! command -v deno >/dev/null 2>&1; then
+    log "Installing Deno..."
+    curl -fsSL https://deno.land/install.sh | sh
+    
+    # Add deno to PATH for current session
+    export PATH="$HOME/.deno/bin:$PATH"
+    
+    # Add to shell profiles for future sessions
+    update_shell_profiles 'export PATH="$HOME/.deno/bin:$PATH"'
+    
+    # Verify installation
+    if command -v deno >/dev/null 2>&1; then
+        log "Deno installed successfully: $(deno --version | head -n1)"
+    else
+        log "WARNING: Deno installation may have failed"
+    fi
+else
+    log "Deno already installed: $(deno --version | head -n1)"
+fi
+
+# Rust development setup
+log "Setting up Rust development environment..."
+
+# Check if Rust is installed
+if ! command -v rustc >/dev/null 2>&1; then
+    log "Installing Rust via rustup..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    
+    # Source the cargo environment for current session
+    if [[ -f "$HOME/.cargo/env" ]]; then
+        source "$HOME/.cargo/env"
+    fi
+    
+    # Add to shell profiles for future sessions (rustup usually does this, but let's ensure)
+    update_shell_profiles 'source "$HOME/.cargo/env"'
+    
+    # Verify installation
+    if command -v rustc >/dev/null 2>&1; then
+        log "Rust installed successfully: $(rustc --version)"
+        log "Cargo available: $(cargo --version)"
+    else
+        log "WARNING: Rust installation may have failed"
+    fi
+else
+    log "Rust already installed: $(rustc --version)"
+    if command -v cargo >/dev/null 2>&1; then
+        log "Cargo available: $(cargo --version)"
+    fi
+fi
+
+# Podman setup
+log "Setting up Podman..."
+
+# Enable and start podman.socket (user service)
+log "Enabling and starting podman socket for current user..."
+systemctl --user enable podman.socket || log "Failed to enable podman.socket"
+systemctl --user start podman.socket || log "Failed to start podman.socket"
 
 log "Desktop applications installation completed!"
 log "Installed applications:"
@@ -43,3 +167,5 @@ log "  Graphics: GIMP, Inkscape, gThumb"
 log "  Media: VLC, OBS Studio"
 log "  Productivity: LibreOffice"
 log "  Web: Firefox"
+log "  Development: C/C++ (gcc, clang, make, cmake, gdb, valgrind), Zig, Dart, Go, Node.js (npm, pnpm), Deno, Python (pip, pipx, poetry), OCaml (opam, odoc, ocamlformat, utop), Rust (rustup, cargo)"
+log "  Containers: Podman, Podman Compose"

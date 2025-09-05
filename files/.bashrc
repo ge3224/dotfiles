@@ -60,3 +60,7 @@ PS1='\[\e[38;2;114;113;105m\][\[\e[38;2;126;156;216m\]\u\[\e[38;2;114;113;105m\]
 
 # Neovim/Vim
 alias vim='nvim'
+. "/home/ge/.deno/env"
+. "$HOME/.cargo/env"
+export PATH="$HOME/.deno/bin:$PATH"
+source "$HOME/.cargo/env"
