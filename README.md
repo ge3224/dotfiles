@@ -1,18 +1,26 @@
-# Dotfiles and Ansible Playbook 
+# Dotfiles
 
-This repo contains dotfiles and an Ansible playbook for my Linux workstation
-set up. It automates the installation and configuration of essential software
-and settings. The dotfiles provide configuration for various tools, while the
-Ansible playbook ensures that all required packages are installed and
-configured correctly.
+A modular dotfiles setup for Arch Linux with automated installation and configuration scripts. This repository contains configuration files for various tools and applications, along with shell scripts that automate the setup process.
+
+## Features
+
+- **Modular Design**: Individual scripts for different components (core tools, applications, window manager, etc.)
+- **Dotfile Management**: Configuration files for Hyprland, Waybar, Neovim, Tmux, Ghostty, and more
+- **Automated Setup**: Shell scripts that handle package installation and configuration deployment
+- **AUR Support**: Automated installation of AUR packages
+- **Environment-based**: Supports different environments via `DEV_ENV` variable
 
 ## Requirements
 
-- An Arch Linux distribution
-- Ansible installed
+- Arch Linux distribution
 - Git installed
-- A `vars.yml` file in the project root defining required keys (See [vars.example.yml](./vars.example.yml))
-- A inventory file defining hosts, e.g. `localhost` (See [inventory.example.yml](./inventory.example.yml))
+
+## Project Structure
+
+- `files/` - Configuration files and dotfiles
+- `runs/` - Installation and setup scripts
+- `aur/` - AUR package management
+- `run` - Main runner script that executes setup scripts
 
 ## Usage
 
@@ -23,13 +31,27 @@ git clone https://github.com/ge3224/dotfiles.git
 cd dotfiles
 ```
 
-2. Run the Ansible playbook:
+2. Run all setup scripts:
 
 ```bash
-ansible-playbook -i inventory.yml main.yml --ask-become-pass
+DEV_ENV=$(pwd) ./run
 ```
 
-Note: The `--ask-become-pass` flag prompts for the sudo password to perform administrative tasks.
+3. Or run specific components:
+
+```bash
+DEV_ENV=$(pwd) ./run core          # Install core system tools
+DEV_ENV=$(pwd) ./run hypr          # Setup Hyprland window manager
+DEV_ENV=$(pwd) ./run neovim        # Configure Neovim
+DEV_ENV=$(pwd) ./run apps          # Install applications
+```
+
+4. Use dry-run mode to see what would be executed:
+
+```bash
+DEV_ENV=$(pwd) ./run --dry
+DEV_ENV=$(pwd) ./run --dry apps    # Dry run for specific component
+```
 
 ## Contributing
 
