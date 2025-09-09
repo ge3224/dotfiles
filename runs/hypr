@@ -10,6 +10,14 @@ DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
 
 echo "Setting up hyprland configuration..."
 
+# Install hyprshot if not already installed
+if ! pacman -Q hyprshot >/dev/null 2>&1; then
+    echo "Installing hyprshot..."
+    sudo pacman -S --needed hyprshot
+else
+    echo "hyprshot already installed"
+fi
+
 # Create .config/hypr directory if it doesn't exist
 mkdir -p "$HOME/.config/hypr"
 
