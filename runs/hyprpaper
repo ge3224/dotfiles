@@ -27,9 +27,6 @@ if [ -f "$HOME/.config/hypr/hyprpaper.conf" ] && [ ! -L "$HOME/.config/hypr/hypr
     cp "$HOME/.config/hypr/hyprpaper.conf" "$HOME/.config/hypr/hyprpaper.conf.backup"
 fi
 
-# Copy wallpaper images
-echo "Copying wallpaper images"
-cp -r "$DOTFILES_DIR/files/wallpaper/"* "$HOME/Pictures/wallpapers/"
 
 # Install wallpaper randomizer script
 echo "Installing wallpaper randomizer script"
