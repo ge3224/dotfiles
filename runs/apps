@@ -42,6 +42,7 @@ packages=(
     "syncthing"             # File syncing
     "podman"                # Container runtime
     "podman-compose"        # Docker Compose alternative for Podman
+    "ripgrep"               # Fast text search tool
 )
 
 log "Installing development packages: ${dev_packages[*]}"
