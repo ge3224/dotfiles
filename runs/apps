@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
+
 log() {
     echo "[APPS] $1"
 }
@@ -45,22 +50,45 @@ packages=(
     "ripgrep"               # Fast text search tool
 )
 
-log "Installing development packages: ${dev_packages[*]}"
-log "Installing application packages: ${packages[*]}"
+# Function to check if a package is installed
+is_package_installed() {
+    pacman -Q "$1" >/dev/null 2>&1
+}
+
+# Function to install missing packages
+install_missing_packages() {
+    local package_list=("$@")
+    local missing_packages=()
+
+    for package in "${package_list[@]}"; do
+        if ! is_package_installed "$package"; then
+            missing_packages+=("$package")
+        else
+            log "Package $package is already installed, skipping"
+        fi
+    done
+
+    if [[ ${#missing_packages[@]} -gt 0 ]]; then
+        log "Installing missing packages: ${missing_packages[*]}"
+        sudo pacman -S --needed --noconfirm "${missing_packages[@]}" || {
+            log "Some packages failed to install, continuing..."
+        }
+    else
+        log "All packages in this category are already installed"
+    fi
+}
 
 if command -v pacman >/dev/null 2>&1; then
     # Update package database first
     sudo pacman -Sy
-    
+
     # Install development packages first
-    sudo pacman -S --needed --noconfirm "${dev_packages[@]}" || {
-        log "Some development packages failed to install, continuing..."
-    }
-    
+    log "Checking development packages..."
+    install_missing_packages "${dev_packages[@]}"
+
     # Install application packages
-    sudo pacman -S --needed --noconfirm "${packages[@]}" || {
-        log "Some application packages failed to install, continuing..."
-    }
+    log "Checking application packages..."
+    install_missing_packages "${packages[@]}"
 else
     log "ERROR: No supported package manager found (pacman)"
     exit 1
@@ -161,6 +189,59 @@ log "Setting up Podman..."
 log "Enabling and starting podman socket for current user..."
 systemctl --user enable podman.socket || log "Failed to enable podman.socket"
 systemctl --user start podman.socket || log "Failed to start podman.socket"
+
+# Cheat configuration setup
+log "Setting up cheat configuration..."
+
+# Check if cheat is installed
+if ! command -v cheat >/dev/null 2>&1; then
+    log "WARNING: cheat is not installed. Please run 'makepkg -sirc' in aur/cheat-bin first."
+    log "Skipping cheat configuration setup."
+else
+    # Create cheat config directory
+    mkdir -p "$HOME/.config/cheat/cheatsheets"
+
+    # Set up community cheatsheets
+    COMMUNITY_CHEATSHEETS_DIR="$HOME/.local/share/cheat/cheatsheets"
+    if [[ ! -d "$COMMUNITY_CHEATSHEETS_DIR" ]]; then
+        log "Cloning community cheatsheets..."
+        mkdir -p "$(dirname "$COMMUNITY_CHEATSHEETS_DIR")"
+        git clone https://github.com/cheat/cheatsheets.git "$COMMUNITY_CHEATSHEETS_DIR"
+    else
+        log "Community cheatsheets already exist, updating..."
+        (cd "$COMMUNITY_CHEATSHEETS_DIR" && git pull)
+    fi
+
+    # Symlink community cheatsheets
+    if [[ ! -L "$HOME/.config/cheat/cheatsheets/community" ]]; then
+        log "Creating symlink for community cheatsheets..."
+        ln -sf "$COMMUNITY_CHEATSHEETS_DIR" "$HOME/.config/cheat/cheatsheets/community"
+    else
+        log "Community cheatsheets symlink already exists"
+    fi
+
+    # Symlink personal cheatsheets
+    CHEATSHEETS_SOURCE="$DOTFILES_DIR/files/cheatsheets"
+    if [[ -d "$CHEATSHEETS_SOURCE" ]]; then
+        # Symlink the personal cheatsheets directory
+        if [[ ! -L "$HOME/.config/cheat/cheatsheets/personal" ]]; then
+            log "Creating symlink for personal cheatsheets..."
+            ln -sf "$CHEATSHEETS_SOURCE/personal" "$HOME/.config/cheat/cheatsheets/personal"
+        else
+            log "Personal cheatsheets symlink already exists"
+        fi
+
+        # Symlink the configuration file
+        if [[ ! -L "$HOME/.config/cheat/conf.yml" ]]; then
+            log "Creating symlink for cheat configuration..."
+            ln -sf "$CHEATSHEETS_SOURCE/conf.yml" "$HOME/.config/cheat/conf.yml"
+        else
+            log "Cheat configuration symlink already exists"
+        fi
+    else
+        log "WARNING: Cheatsheets source directory not found at $CHEATSHEETS_SOURCE"
+    fi
+fi
 
 log "Desktop applications installation completed!"
 log "Installed applications:"
