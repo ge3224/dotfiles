@@ -13,3 +13,6 @@
 [submodule "aur/google-chrome"]
 	path = aur/google-chrome
 	url = https://aur.archlinux.org/google-chrome.git
+[submodule "files/cheatsheets"]
+	path = files/cheatsheets
+	url = git@github.com:ge3224/cheatsheets.git
