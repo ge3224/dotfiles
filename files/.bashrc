@@ -64,3 +64,6 @@ alias vim='nvim'
 . "$HOME/.cargo/env"
 export PATH="$HOME/.deno/bin:$PATH"
 source "$HOME/.cargo/env"
+
+# Go
+export PATH="$PATH:$(go env GOPATH)/bin"
