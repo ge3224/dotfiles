@@ -19,3 +19,6 @@
 [submodule "aur/cheat-bin"]
 	path = aur/cheat-bin
 	url = https://aur.archlinux.org/cheat-bin.git
+[submodule "aur/rustdesk-bin"]
+	path = aur/rustdesk-bin
+	url = https://aur.archlinux.org/rustdesk-bin.git
