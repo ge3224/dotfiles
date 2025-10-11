@@ -67,3 +67,4 @@ source "$HOME/.cargo/env"
 
 # Go
 export PATH="$PATH:$(go env GOPATH)/bin"
+export EDITOR=nvim
