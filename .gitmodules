@@ -22,3 +22,6 @@
 [submodule "aur/rustdesk-bin"]
 	path = aur/rustdesk-bin
 	url = https://aur.archlinux.org/rustdesk-bin.git
+[submodule "aur/tailwindcss-bin"]
+	path = aur/tailwindcss-bin
+	url = https://aur.archlinux.org/tailwindcss-bin.git
