@@ -54,6 +54,17 @@ shopt -s dirspell        # Correct minor spelling errors in directory names
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
+# fzf shell integration
+# Ctrl-R: Search command history
+# Ctrl-T: Search files and paste path
+# Alt-C: cd into selected directory
+if [ -f /usr/share/fzf/key-bindings.bash ]; then
+    source /usr/share/fzf/key-bindings.bash
+fi
+if [ -f /usr/share/fzf/completion.bash ]; then
+    source /usr/share/fzf/completion.bash
+fi
+
 # Kanagawa-themed prompt
 # Shows: [user@host] /current/path $ 
 PS1='\[\e[38;2;114;113;105m\][\[\e[38;2;126;156;216m\]\u\[\e[38;2;114;113;105m\]@\[\e[38;2;152;187;108m\]\h\[\e[38;2;114;113;105m\]] \[\e[38;2;230;195;132m\]\w\[\e[38;2;220;215;186m\] \$ \[\e[0m\]'
