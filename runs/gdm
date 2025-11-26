@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+log() {
+    echo "[GDM] $1"
+}
+
+log "Configuring GDM display manager..."
+
+# Check if GDM is installed
+if ! pacman -Q gdm &>/dev/null; then
+    log "Installing GDM..."
+    sudo pacman -S --noconfirm gdm
+else
+    log "GDM is already installed"
+fi
+
+# Disable SDDM if it's enabled (migration from SDDM)
+if systemctl is-enabled sddm &>/dev/null; then
+    log "Disabling SDDM..."
+    sudo systemctl disable sddm
+fi
+
+# Disable LightDM if it's enabled (just in case)
+if systemctl is-enabled lightdm &>/dev/null; then
+    log "Disabling LightDM..."
+    sudo systemctl disable lightdm
+fi
+
+# Enable GDM
+if ! systemctl is-enabled gdm &>/dev/null; then
+    log "Enabling GDM..."
+    sudo systemctl enable gdm
+else
+    log "GDM is already enabled"
+fi
+
+log "GDM configuration completed!"
+log "Key changes:"
+log "  - GDM installed and enabled"
+log "  - Other display managers disabled (if any)"
+log ""
+log "Reboot to use GDM as your display manager."
+log "Select 'Hyprland (uwsm)' from the session menu when logging in."
