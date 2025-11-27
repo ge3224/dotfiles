@@ -331,3 +331,19 @@
 #temperature.critical {
     color: @fireRed;
 }
+
+#custom-fcitx5 {
+    background-color: @charcoalBlack;
+    padding: 0.3rem 0.6rem;
+    border-radius: 2px;
+    color: @urbanGray;
+    margin-left: 1rem;
+}
+
+#custom-fcitx5.chinese {
+    color: @flameYellow;
+}
+
+#custom-fcitx5.english {
+    color: @skateBlue;
+}

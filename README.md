@@ -53,6 +53,43 @@ DEV_ENV=$(pwd) ./run --dry
 DEV_ENV=$(pwd) ./run --dry apps    # Dry run for specific component
 ```
 
+## Input Method (fcitx5)
+
+This setup includes fcitx5 for multi-language input support, specifically configured for Traditional Chinese (繁體中文) using Pinyin.
+
+### Features
+
+- **Pinyin Input**: Type pinyin to get Traditional Chinese characters (台灣繁體字)
+- **Dual Language**: Seamless switching between English and Chinese
+- **Waybar Integration**: Visual indicator showing current input language (英/中)
+- **Wayland Native**: Uses native Wayland input method protocol for better performance
+
+### Installation
+
+```bash
+DEV_ENV=$(pwd) ./run fcitx5
+```
+
+After running the script, restart Hyprland (log out and back in) for changes to take effect.
+
+### Usage
+
+- **Ctrl+Space**: Toggle between English and Chinese input methods
+- **Ctrl+Shift+F**: Toggle Traditional/Simplified Chinese conversion
+- **Space**: Confirm first candidate (auto-select)
+- **Shift**: Toggle English/Chinese mode within input method
+
+### Customization
+
+- Run `fcitx5-configtool` for GUI configuration
+- Configuration files located in `files/fcitx5/`
+- Waybar indicator script: `files/waybar/fcitx5-indicator.sh`
+
+### Example
+
+Type `nihao` → 你好
+Type `taiwan` → 臺灣
+
 ## Contributing
 
 If you have any improvements or fixes, please fork the repository, create a

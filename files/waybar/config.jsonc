@@ -8,6 +8,7 @@
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
     "modules-right": [
+        "custom/fcitx5",
         "wireplumber",
         "network",
         "cpu",
@@ -72,5 +73,13 @@
         "critical-threshold": 80,
         "format-critical": "󰸁 {temperatureC}°C",
         "tooltip": false
+    },
+
+    "custom/fcitx5": {
+        "exec": "~/.config/waybar/fcitx5-indicator.sh",
+        "return-type": "json",
+        "interval": 1,
+        "format": "{}",
+        "tooltip": true
     }
 }
